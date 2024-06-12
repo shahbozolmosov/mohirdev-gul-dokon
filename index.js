@@ -3,6 +3,9 @@ const express = require("express");
 // App
 const app = express();
 
+// Routes
+app.use("/auth", require("./routes/auth.route"));
+
 // PORT
 const PORT = process.env.PORT || 4000;
 

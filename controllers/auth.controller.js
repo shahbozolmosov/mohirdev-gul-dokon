@@ -11,6 +11,18 @@ const getLoginPage = async (req, res) => {
   }
 };
 
+// Desc       Login user
+// Route      POST /auth/login
+// Access     Public
+const loginUser = async (req, res) => {
+  try {
+    return res.redirect("/dashboard");
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 module.exports = {
   getLoginPage,
+  loginUser,
 };

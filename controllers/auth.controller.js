@@ -22,7 +22,21 @@ const loginUser = async (req, res) => {
   }
 };
 
+// Desc       Get register page
+// Route      GET /auth/register
+// Access     Public
+const getRegisterPage = async (req, res) => {
+  try {
+    return res.render("auth/register", {
+      title: "Sign up",
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 module.exports = {
   getLoginPage,
   loginUser,
+  getRegisterPage,
 };

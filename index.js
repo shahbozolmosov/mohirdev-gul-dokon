@@ -1,9 +1,28 @@
 const express = require("express");
 const exphbs = require("express-handlebars");
+const session = require("express-session");
+const csrf = require("csurf");
+const flash = require("connect-flash");
 const db = require("./models");
 
 // App
 const app = express();
+
+// Initialize requests
+app.use(express.json());
+app.use(express.urlencoded({ extends: false }));
+
+// Session
+app.use(
+  session({
+    secret: "my secret value",
+    resave: false,
+    saveUninitialized: false,
+  })
+);
+
+// Message
+app.use(flash());
 
 // Initialize template engine (handlebars)
 app.engine(".hbs", exphbs.engine({ extname: ".hbs" }));

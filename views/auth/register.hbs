@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-md-6 offset-3">
       <form
-        action="/auth/login"
+        action="/auth/register"
         method="POST"
         enctype="application/x-www-form-urlencoded"
         novalidate
@@ -10,6 +10,26 @@
         {{#if errorMessage}}
           <div class="alert alert-danger" role="alert">{{errorMessage}}</div>
         {{/if}}
+        <div class="mb-3">
+          <label for="firstName" class="form-label">First name</label>
+          <input
+            type="text"
+            class="form-control"
+            name="firstName"
+            id="firstName"
+            value="{{oldInput.firstName}}"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="lastName" class="form-label">Last name</label>
+          <input
+            type="text"
+            class="form-control"
+            name="lastName"
+            id="lastName"
+            value="{{oldInput.lastName}}"
+          />
+        </div>
         <div class="mb-3">
           <label for="email" class="form-label">Email address</label>
           <input
@@ -27,6 +47,15 @@
             class="form-control"
             name="password"
             id="password"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="passwordConfirm" class="form-label">Password confirm</label>
+          <input
+            type="passwordConfirm"
+            class="form-control"
+            name="passwordConfirm"
+            id="passwordConfirm"
           />
         </div>
         <input type="hidden" name="_csrf" value="{{csrfToken}}" />

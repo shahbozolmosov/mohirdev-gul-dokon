@@ -10,6 +10,7 @@ app.set("view engine", ".hbs");
 
 // Routes
 app.use("/auth", require("./routes/auth.route"));
+app.use("/dashboard", require("./routes/dashboard.route"));
 
 // PORT
 const PORT = process.env.PORT || 4000;

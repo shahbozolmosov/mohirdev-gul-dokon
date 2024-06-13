@@ -1,5 +1,6 @@
 const express = require("express");
 const exphbs = require("express-handlebars");
+const db = require("./models");
 
 // App
 const app = express();
@@ -17,6 +18,8 @@ const PORT = process.env.PORT || 4000;
 
 const start = async () => {
   try {
+    const connect = await db.sequelize.sync({ force: true });
+
     app.listen(PORT, () => {
       console.log(`Server running at ${PORT}`);
     });

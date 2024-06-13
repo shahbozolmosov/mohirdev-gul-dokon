@@ -1,7 +1,12 @@
 const express = require("express");
+const exphbs = require("express-handlebars");
 
 // App
 const app = express();
+
+// Initialize template engine (handlebars)
+app.engine(".hbs", exphbs.engine({ extname: ".hbs" }));
+app.set("view engine", ".hbs");
 
 // Routes
 app.use("/auth", require("./routes/auth.route"));

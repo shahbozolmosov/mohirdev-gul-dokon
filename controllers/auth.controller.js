@@ -1,9 +1,11 @@
 // Desc       Get login page
 // Route      GET /auth/login
 // Access     Public
-const getLoginPage = (req, res) => {
+const getLoginPage = async (req, res) => {
   try {
-    return res.send("Login page");
+    return res.render("auth/login", {
+      title: "Login",
+    });
   } catch (error) {
     console.log(error);
   }

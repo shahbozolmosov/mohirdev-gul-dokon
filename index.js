@@ -1,9 +1,11 @@
 const express = require("express");
 const exphbs = require("express-handlebars");
 const session = require("express-session");
+const pgStore = require("connect-pg-simple")(session);
 const csrf = require("csurf");
 const flash = require("connect-flash");
 const db = require("./models");
+const pool = require("./config/db");
 
 // App
 const app = express();
@@ -15,6 +17,10 @@ app.use(express.urlencoded({ extends: false }));
 // Session
 app.use(
   session({
+    store: new pgStore({
+      pool,
+      tableName: "user_session",
+    }),
     secret: "my secret value",
     resave: false,
     saveUninitialized: false,

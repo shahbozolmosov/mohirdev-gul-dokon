@@ -1,3 +1,9 @@
+const db = require("../models");
+const bcrypt = require("bcryptjs");
+const { validationResult } = require("express-validator");
+
+const User = db.user;
+
 // Desc       Get login page
 // Route      GET /auth/login
 // Access     Public
@@ -43,11 +49,48 @@ const registerUser = async (req, res) => {
   try {
     console.log("req -------------->", req.body);
 
-    const { firstName, lastName, email, password, passwordConfirm } = req.body;
+    const { firstName, lastName, email, password, password2 } = req.body;
+    const errors = validationResult(req);
 
-    req.flash("error", "Example");
+    if (!errors.isEmpty()) {
+      return res.status(400).render("/auth/register", {
+        title: "Register",
+        errorMessage: errors.array()[0].msg,
+        oldInput: {
+          firstName,
+          lastName,
+          email,
+          password,
+          password2,
+        },
+      });
+    }
 
-    return res.redirect("/auth/register");
+    // Check passwords match
+    if (password !== password2) {
+      req.flash("error", "Passwords doesn't match.");
+      return res.redirect('/auth/register');
+    }
+
+    // Check user exists
+    const userExist = await User.findOne({ where: { email } });
+    if (userExist) {
+      req.flash("error", "This user already exists.");
+      return res.redirect("/auth/register");
+    }
+
+    // Hash password
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(password, salt);
+
+    await User.create({
+      firstName,
+      lastName,
+      email,
+      password: hashedPassword,
+    });
+
+    return res.redirect("/dashboard");
   } catch (error) {
     console.log(error);
   }

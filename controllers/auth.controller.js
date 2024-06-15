@@ -11,6 +11,7 @@ const getLoginPage = async (req, res) => {
   try {
     return res.render("auth/login", {
       title: "Login",
+      errorMessage: req.flash("error"),
     });
   } catch (error) {
     console.log(error);
@@ -22,7 +23,56 @@ const getLoginPage = async (req, res) => {
 // Access     Public
 const loginUser = async (req, res) => {
   try {
-    return res.redirect("/dashboard");
+    const isAuthenticated = req.session.isLogged;
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+      return res.status(400).render("auth/login", {
+        title: "Login",
+        errorMessage: errors.array()[0].msg,
+        oldInput: {
+          email: req.body.email,
+        },
+      });
+    }
+
+    const userExist = await User.findOne({ where: { email: req.body.email } });
+
+    if (userExist) {
+      const matchPassword = await bcrypt.compare(
+        req.body.password,
+        userExist.password
+      );
+
+      if (matchPassword) {
+        req.session.isLogged = true;
+        req.session.user = userExist;
+        req.session.save((err) => {
+          if (err) throw err;
+          return res.redirect("/dashboard");
+        });
+      } else {
+        req.flash("error", "You entered wrong email or password");
+        return res.status(400).render("/auth/login", {
+          title: "Login",
+          isAuthenticated,
+          errorMessage: req.flash("error"),
+          oldInput: {
+            email: req.body.email,
+          },
+        });
+      }
+    } else {
+      req.flash("error", "You entered wrong email or password");
+      // return res.redirect("/auth/login");
+      return res.status(400).render("auth/login", {
+        title: "Login",
+        errorMessage: req.flash("error"),
+        oldInput: {
+          email: req.body.email,
+        },
+      });
+    }
   } catch (error) {
     console.log(error);
   }

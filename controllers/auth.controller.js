@@ -47,8 +47,6 @@ const getRegisterPage = async (req, res) => {
 // Access     Private
 const registerUser = async (req, res) => {
   try {
-    console.log("req -------------->", req.body);
-
     const { firstName, lastName, email, password, password2 } = req.body;
     const errors = validationResult(req);
 
@@ -69,7 +67,7 @@ const registerUser = async (req, res) => {
     // Check passwords match
     if (password !== password2) {
       req.flash("error", "Passwords doesn't match.");
-      return res.redirect('/auth/register');
+      return res.redirect("/auth/register");
     }
 
     // Check user exists

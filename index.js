@@ -1,4 +1,5 @@
 const express = require("express");
+const dotenv = require("dotenv");
 const exphbs = require("express-handlebars");
 const session = require("express-session");
 const pgStore = require("connect-pg-simple")(session);
@@ -6,6 +7,9 @@ const csrf = require("csurf");
 const flash = require("connect-flash");
 const db = require("./models");
 const pool = require("./config/db");
+
+// ENV variables
+dotenv.config();
 
 // App
 const app = express();

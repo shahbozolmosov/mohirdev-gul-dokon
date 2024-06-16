@@ -1,37 +1,78 @@
-<div class="container mt-5">
-  <div class="row">
-    <div class="col-md-6 offset-3">
-      <form
-        action="/auth/login"
-        method="POST"
-        enctype="application/x-www-form-urlencoded"
-        novalidate
-      >
-        {{#if errorMessage}}
-          <div class="alert alert-danger" role="alert">{{errorMessage}}</div>
-        {{/if}}
-        <div class="mb-3">
-          <label for="email" class="form-label">Email address</label>
-          <input
-            type="email"
-            class="form-control"
-            name="email"
-            id="email"
-            value="{{oldInput.email}}"
-          />
+<!-- ========== signin-section start ========== -->
+<section class="signin-section col-lg-6 offset-3">
+  <div class="container-fluid">
+    <!-- ========== title-wrapper start ========== -->
+    <div class="title-wrapper pt-30">
+      <div class="row align-items-center">
+        <div class="col-md-6">
+          <div class="title">
+            <h2>Sign in</h2>
+          </div>
         </div>
-        <div class="mb-3">
-          <label for="password" class="form-label">Password</label>
-          <input
-            type="password"
-            class="form-control"
-            name="password"
-            id="password"
-          />
-        </div>
-        <input type="hidden" name="_csrf" value="{{csrfToken}}" />
-        <button type="submit" class="btn btn-primary">Submit</button>
-      </form>
+      </div>
+      <!-- end row -->
     </div>
+    <!-- ========== title-wrapper end ========== -->
+
+    <div class="signin-wrapper">
+      <div class="form-wrapper">
+        <h6 class="mb-15">Sign In Form</h6>
+        <p class="text-sm mb-25">
+          Start creating the best possible user experience for you customers.
+        </p>
+        <form
+          action="/auth/login"
+          method="POST"
+          enctype="application/x-www-form-urlencoded"
+          novalidate
+        >
+          {{#if errorMessage}}
+            <div class="alert alert-danger" role="alert">{{errorMessage}}</div>
+          {{/if}}
+          <div class="row">
+            <div class="col-12">
+              <div class="input-style-1">
+                <label>Email</label>
+                <input
+                  type="email"
+                  placeholder="Email"
+                  name="email"
+                  value="{{oldInput.email}}"
+                />
+              </div>
+            </div>
+            <!-- end col -->
+            <div class="col-12">
+              <div class="input-style-1">
+                <label>Password</label>
+                <input type="password" placeholder="Password" name="password" />
+              </div>
+            </div>
+            <!-- end col -->
+            <div class="col-12">
+              <div
+                class="text-start text-md-end text-lg-start text-xxl-end mb-30"
+              >
+                <a href="/auth/forgotPassword" class="hover-underline">
+                  Forgot Password?
+                </a>
+              </div>
+            </div>
+            <!-- end col -->
+            <div class="col-12">
+              <div class="button-group d-flex justify-content-center flex-wrap">
+                <button
+                  class="main-btn primary-btn btn-hover w-100 text-center"
+                >
+                  Sign In
+                </button>
+              </div>
+            </div>
+          </div>
+          <!-- end row -->
+        </form>
+      </div>
+    </div>
+    <!-- end row -->
   </div>
-</div>
+</section>

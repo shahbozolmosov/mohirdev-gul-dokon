@@ -8,7 +8,7 @@ const protected = (req, res, next) => {
 
 const guest = (req, res, next) => {
   if (req.session.isLogged) {
-    res.redirect("/diary/my");
+    res.redirect("/dashboard");
   }
 
   next();

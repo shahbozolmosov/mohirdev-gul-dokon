@@ -9,8 +9,10 @@ const User = db.user;
 // Access     Public
 const getLoginPage = async (req, res) => {
   try {
+    const isAtuhenticated = req.session.isLogged;
     return res.render("auth/login", {
       title: "Login",
+      isAtuhenticated,
       errorMessage: req.flash("error"),
     });
   } catch (error) {

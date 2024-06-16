@@ -8,10 +8,11 @@ const {
   registerUser,
   loginUser,
 } = require("../controllers/auth.controller");
+const { guest } = require("../middlewares/auth");
 
-router.get("/login", getLoginPage);
-router.get("/register", getRegisterPage);
-router.post("/login", loginUser);
-router.post("/register", registerUser);
+router.get("/login", guest, getLoginPage);
+router.get("/register", guest, getRegisterPage);
+router.post("/login", guest, loginUser);
+router.post("/register", guest, registerUser);
 
 module.exports = router;

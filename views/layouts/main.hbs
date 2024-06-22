@@ -28,6 +28,9 @@
     <!-- ======== main-wrapper start =========== -->
     {{#if isAtuhenticated}}
     <main class="main-wrapper">
+      {{#if isAtuhenticated}}
+        {{>header}}
+      {{/if}}
       {{{body}}}
     </main>
     {{else}}

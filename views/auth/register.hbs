@@ -1,72 +1,109 @@
-<div class="container mt-5">
-  <div class="row">
-    <div class="col-md-6 offset-3">
-      <form
-        action="/auth/register"
-        method="POST"
-        enctype="application/x-www-form-urlencoded"
-        {{!-- novalidate --}}
-      >
-        {{#if errorMessage}}
-          <div class="alert alert-danger" role="alert">{{errorMessage}}</div>
-        {{/if}}
-        <div class="mb-3">
-          <label for="firstName" class="form-label">First name</label>
-          <input
-            type="text"
-            class="form-control"
-            name="firstName"
-            id="firstName"
-            value="{{oldInput.firstName}}"
-            required
-          />
+<!-- ========== signin-section start ========== -->
+<section class="signin-section col-lg-6 offset-3">
+  <div class="container-fluid">
+    <!-- ========== title-wrapper start ========== -->
+    <div class="title-wrapper pt-30">
+      <div class="row align-items-center">
+        <div class="col-md-6">
+          <div class="title">
+            <h2>Sign Un</h2>
+          </div>
         </div>
-        <div class="mb-3">
-          <label for="lastName" class="form-label">Last name</label>
-          <input
-            type="text"
-            class="form-control"
-            name="lastName"
-            id="lastName"
-            value="{{oldInput.lastName}}"
-            required
-          />
-        </div>
-        <div class="mb-3">
-          <label for="email" class="form-label">Email address</label>
-          <input
-            type="email"
-            class="form-control"
-            name="email"
-            id="email"
-            value="{{oldInput.email}}"
-            required
-          />
-        </div>
-        <div class="mb-3">
-          <label for="password" class="form-label">Password</label>
-          <input
-            type="password"
-            class="form-control"
-            name="password"
-            id="password"
-            required
-          />
-        </div>
-        <div class="mb-3">
-          <label for="password2" class="form-label">Password confirm</label>
-          <input
-            type="password"
-            class="form-control"
-            name="password2"
-            id="password2"
-            value="{{oldInput.password2}}"
-            required
-          />
-        </div>
-        <input type="hidden" name="_csrf" value="{{csrfToken}}" />
-        <button type="submit" class="btn btn-primary">Submit</button>
-      </form>
+      </div>
+      <!-- end row -->
     </div>
+    <!-- ========== title-wrapper end ========== -->
+
+    <div class="signin-wrapper">
+      <div class="form-wrapper">
+        <h6 class="mb-15">Sign Un Form</h6>
+        <p class="text-sm mb-25">
+          Start creating the best possible user experience for you customers.
+        </p>
+        <form
+          action="/auth/register"
+          method="POST"
+          enctype="application/x-www-form-urlencoded"
+          novalidate
+        >
+          {{#if errorMessage}}
+            <div class="alert alert-danger" role="alert">{{errorMessage}}</div>
+          {{/if}}
+          <div class="row">
+            <div class="col-12">
+              <div class="input-style-1">
+                <label>First name</label>
+                <input
+                  type="text"
+                  placeholder="First name"
+                  name="firstName"
+                  value="{{oldInput.firstName}}"
+                />
+              </div>
+            </div>
+            <!-- end col -->
+            <div class="col-12">
+              <div class="input-style-1">
+                <label>Last name</label>
+                <input
+                  type="text"
+                  placeholder="Last name"
+                  name="lastName"
+                  value="{{oldInput.lastName}}"
+                />
+              </div>
+            </div>
+            <!-- end col -->
+            <div class="col-12">
+              <div class="input-style-1">
+                <label>Email</label>
+                <input
+                  type="email"
+                  placeholder="Email"
+                  name="email"
+                  value="{{oldInput.email}}"
+                />
+              </div>
+            </div>
+            <!-- end col -->
+            <div class="col-12">
+              <div class="input-style-1">
+                <label>Password</label>
+                <input type="password" placeholder="Password" name="password" />
+              </div>
+            </div>
+            <!-- end col -->
+            <div class="col-12">
+              <div class="input-style-1">
+                <label>Repeat password</label>
+                <input type="password" placeholder="Password" name="password2" />
+              </div>
+            </div>
+            <!-- end col -->
+            <div class="col-12 mb-2">
+              <div class="button-group d-flex justify-content-center flex-wrap">
+                <button
+                  class="main-btn primary-btn btn-hover w-100 text-center"
+                >
+                  Sign Up
+                </button>
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="button-group d-flex justify-content-center flex-wrap">
+                <a
+                  href="/auth/login"
+                  class="main-btn primary-btn light-btn btn-text btn-hover w-100 text-center"
+                >
+                  Sign In
+                </a>
+              </div>
+            </div>
+          </div>
+          <!-- end row -->
+        </form>
+      </div>
+    </div>
+    <!-- end row -->
   </div>
-</div>
+</section>

@@ -25,7 +25,22 @@ router.post(
   guest,
   loginUser
 );
-router.post("/register", guest, registerUser);
+router.post(
+  "/register",
+  [
+    body("firstName", "Name can contain only alphabetic characters").isAlpha(),
+    body("lastName", "Name can contain only alphabetic characters").isAlpha(),
+    body("email", "Please enter a valid email address").isEmail(),
+    body(
+      "password",
+      "Please enter password with minimum 6 characters and with alphabetical and numeric values"
+    )
+      .isLength({ min: 6 })
+      .isAlphanumeric(),
+  ],
+  guest,
+  registerUser
+);
 router.get("/logout", protected, logout);
 
 module.exports = router;

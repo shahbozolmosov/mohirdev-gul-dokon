@@ -96,7 +96,7 @@ const getRegisterPage = async (req, res) => {
 
 // Desc       Register user
 // Route      POST /auth/register
-// Access     Private
+// Access     Public
 const registerUser = async (req, res) => {
   try {
     const { firstName, lastName, email, password, password2 } = req.body;
@@ -146,9 +146,19 @@ const registerUser = async (req, res) => {
   }
 };
 
+// Desc       Logout user
+// Route      GET /auth/logout
+// Access     Private
+const logout = async (req, res) => {
+  req.session.destroy(() => {
+    res.redirect("/auth/login");
+  });
+};
+
 module.exports = {
   getLoginPage,
   loginUser,
   getRegisterPage,
   registerUser,
+  logout,
 };

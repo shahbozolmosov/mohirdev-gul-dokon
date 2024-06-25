@@ -54,7 +54,21 @@ const getProductsAddPage = async (req, res) => {
   }
 };
 
+// Desc       Add new product
+// Route      POST /dashboard/products/add
+// Access     Private
+const addNewProduct = async (req, res) => {
+  try {
+    console.log(req);
+
+    return res.redirect('/dashboard/products');
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 module.exports = {
   getProductsPage,
   getProductsAddPage,
+  addNewProduct,
 };

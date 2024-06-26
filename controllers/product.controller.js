@@ -59,9 +59,10 @@ const getProductsAddPage = async (req, res) => {
 // Access     Private
 const addNewProduct = async (req, res) => {
   try {
-    console.log(req);
+    const {title, image, description, amount} = req.body;
+    console.log(req.body)
 
-    return res.redirect('/dashboard/products');
+    return res.redirect('/dashboard/products/add');
   } catch (error) {
     console.log(error);
   }

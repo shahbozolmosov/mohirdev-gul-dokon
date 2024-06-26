@@ -45,6 +45,7 @@ app.use(express.static(path.join(__dirname, "public")));
 // Routes
 app.use("/auth", require("./routes/auth.route"));
 app.use("/dashboard", require("./routes/dashboard.route"));
+app.use("/dashboard/products", require("./routes/dashboardProduct.route"));
 
 // PORT
 const PORT = process.env.PORT || 4000;

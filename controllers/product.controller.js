@@ -1,3 +1,7 @@
+const { validationResult } = require("express-validator");
+const db = require("../models");
+const Product = db.product;
+
 // Desc       Get dashboard products page
 // Route      GET /dashboard/products
 // Access     Private
@@ -59,10 +63,50 @@ const getProductsAddPage = async (req, res) => {
 // Access     Private
 const addNewProduct = async (req, res) => {
   try {
-    const {title, image, description, amount} = req.body;
-    console.log(req.body)
+    const isAtuhenticated = req.session.isLogged;
+    const { title, image, description, amount } = req.body;
 
-    return res.redirect('/dashboard/products/add');
+    // Errors
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+      return res.status(400).render("dashboard/products/add", {
+        title: "Product add",
+        breadcrumb: [
+          {
+            label: "Dashboard",
+            route: "/dashboard",
+          },
+          {
+            label: "Products",
+            route: "/dashboard/products",
+          },
+          {
+            label: "Product Add",
+            route: "/dashboard/products/add",
+            active: true,
+          },
+        ],
+        isAtuhenticated,
+        errorMessage: errors.array()[0].msg,
+        oldInput: {
+          title,
+          image,
+          description,
+          amount,
+        },
+      });
+    }
+
+    // Create new product
+    await Product.create({
+      title,
+      image,
+      description,
+      amount,
+    });
+
+    return res.redirect("/dashboard/products/add");
   } catch (error) {
     console.log(error);
   }

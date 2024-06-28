@@ -1,0 +1,64 @@
+<!-- ========== card components start ========== -->
+<section class="card-components">
+  <div class="container-fluid">
+    <!-- ========== title-wrapper start ========== -->
+    <div class="title-wrapper pt-30">
+      <div class="row align-items-center">
+        <div class="col-md-6">
+          {{>wrapperTitle label="Product Add"}}
+        </div>
+        <!-- end col -->
+        <div class="col-md-6">
+          {{>breadcrumb}}
+        </div>
+        <!-- end col -->
+      </div>
+      <!-- end row -->
+    </div>
+    <!-- ========== title-wrapper end ========== -->
+    
+    <!-- ========== form-elements-wrapper start ========== -->
+    <div class="form-elements-wrapper">
+      <div class="row">
+        <div class="col-lg-6 offset-3">
+          {{#if errorMessage}}
+            <div class="alert alert-danger" role="alert">
+              {{errorMessage}}
+            </div>
+          {{/if}}
+          <form method="POST" accept="/dashboard/products/add">
+            <!-- input style start -->
+            <div class="card-style mb-30">
+              <h6 class="mb-25">Form</h6>
+              <div class="input-style-1">
+                <label>Title</label>
+                <input name="title" type="text" placeholder="Title" autofocus value="{{oldInput.title}}" />
+              </div>
+              <div class="input-style-1">
+                <label>Image</label>
+                <input name="image" type="text" placeholder="Image" value="{{oldInput.image}}" />
+              </div>
+              <div class="input-style-1">
+                <label>Description</label>
+                <textarea name="description" placeholder="Description">{{oldInput.description}}</textarea>
+              </div>
+              <div class="input-style-1">
+                <label>Amount</label>
+                <input name="amount" type="number" placeholder="Amount" value="{{oldInput.amount}}" />
+              </div>
+              <button class="main-btn dark-btn btn-hover me-3" type="submit">
+                Save
+              </button>  
+              <button class="main-btn light-btn btn-hover" type="reset">
+                Reset
+              </button>  
+              <!-- end input -->
+            </div>
+            <!-- end card -->
+          </form>
+          <!-- ======= input style end ======= -->
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

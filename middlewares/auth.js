@@ -1,6 +1,6 @@
 const protected = (req, res, next) => {
   if (!req.session.isLogged) {
-    res.redirect("/auth/login");
+    return res.redirect("/auth/login");
   }
 
   next();
@@ -8,7 +8,7 @@ const protected = (req, res, next) => {
 
 const guest = (req, res, next) => {
   if (req.session.isLogged) {
-    res.redirect("/dashboard");
+    return res.redirect("/dashboard");
   }
 
   next();

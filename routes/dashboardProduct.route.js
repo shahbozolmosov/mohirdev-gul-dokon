@@ -24,12 +24,25 @@ router.post(
     body("description", "Please enter a description")
       .notEmpty()
       .isLength({ min: 3, max: 255 }),
-    body("amount", "Please enter a valid amount")
-      .isNumeric(),
+    body("amount", "Please enter a valid amount").isNumeric(),
   ],
   protected,
   addNewProduct
 );
-router.post("/:productId/update", protected, updateProduct);
+router.post(
+  "/:productId/update",
+  [
+    body("title", "Please enter a product")
+      .notEmpty()
+      .isLength({ min: 3, max: 255 }),
+    body("image", "Please enter a valid image url").isURL(),
+    body("description", "Please enter a description")
+      .notEmpty()
+      .isLength({ min: 3, max: 255 }),
+    body("amount", "Please enter a valid amount").isNumeric(),
+  ],
+  protected,
+  updateProduct
+);
 
 module.exports = router;

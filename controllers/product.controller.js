@@ -184,5 +184,5 @@ module.exports = {
   getProductsAddPage,
   addNewProduct,
   getProductsUpdatePage,
-  updateProduct
+  updateProduct,
 };

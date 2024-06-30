@@ -37,7 +37,7 @@
                     <img
                       style="height: 400px; width:100%; object-fit:cover"
                       src="{{image}}"
-                      alt=""
+                      alt={{title}}
                     />
                   </a>
                 </div>
@@ -49,8 +49,8 @@
                   <b>{{amount}}</b>
                   <div class="mb-5"> </div>
 
-                  <a class="main-btn success-btn square-btn btn-hover">Update</a>
-                  <a class="main-btn danger-btn square-btn btn-hover">Delete</a>
+                  <a class="main-btn success-btn square-btn btn-hover" href="/dashboard/products/{{id}}/update">Update</a>
+                  <a class="main-btn danger-btn square-btn btn-hover" href="/dashboard/products/{{id}}/delete">Delete</a>
 
                 </div>
               </div>

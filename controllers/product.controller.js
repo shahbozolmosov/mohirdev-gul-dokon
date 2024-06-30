@@ -1,6 +1,7 @@
 const { validationResult } = require("express-validator");
 const db = require("../models");
 const { raw } = require("express");
+const { where } = require("sequelize");
 const Product = db.product;
 
 // Desc       Get dashboard products page
@@ -121,8 +122,44 @@ const addNewProduct = async (req, res) => {
   }
 };
 
+// Desc       Get dashboard products update page
+// Route      GET /dashboard/products/product_id/update
+// Access     Private
+const getProductsUpdatePage = async (req, res) => {
+  try {
+    
+    const product = await Product.findByPk(req.params.productId, {
+      raw: true,
+    });
+    
+    const isAtuhenticated = req.session.isLogged;
+    return res.render("dashboard/products/update", {
+      title: "Product Update",
+      breadcrumb: [
+        {
+          label: "Dashboard",
+          route: "/dashboard",
+        },
+        {
+          label: "Products",
+          route: "/dashboard/products",
+        },
+        {
+          label: "Product Update",
+          active: true,
+        },
+      ],
+      product,
+      isAtuhenticated,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 module.exports = {
   getProductsPage,
   getProductsAddPage,
   addNewProduct,
+  getProductsUpdatePage
 };

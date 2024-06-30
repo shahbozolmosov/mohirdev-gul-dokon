@@ -5,7 +5,7 @@
     <div class="title-wrapper pt-30">
       <div class="row align-items-center">
         <div class="col-md-6">
-          {{>wrapperTitle label="Product Add"}}
+          {{>wrapperTitle label=title}}
         </div>
         <!-- end col -->
         <div class="col-md-6">
@@ -32,19 +32,19 @@
               <h6 class="mb-25">Form</h6>
               <div class="input-style-1">
                 <label>Title</label>
-                <input name="title" type="text" placeholder="Title" autofocus value="{{oldInput.title}}" />
+                <input name="title" type="text" placeholder="Title" autofocus value="{{product.title}}" />
               </div>
               <div class="input-style-1">
                 <label>Image</label>
-                <input name="image" type="text" placeholder="Image" value="{{oldInput.image}}" />
+                <input name="image" type="text" placeholder="Image" value="{{product.image}}" />
               </div>
               <div class="input-style-1">
                 <label>Description</label>
-                <textarea name="description" placeholder="Description">{{oldInput.description}}</textarea>
+                <textarea name="description" placeholder="Description">{{product.description}}</textarea>
               </div>
               <div class="input-style-1">
                 <label>Amount</label>
-                <input name="amount" type="number" placeholder="Amount" value="{{oldInput.amount}}" />
+                <input name="amount" type="number" placeholder="Amount" value="{{product.amount}}" />
               </div>
               <button class="main-btn dark-btn btn-hover me-3" type="submit">
                 Save

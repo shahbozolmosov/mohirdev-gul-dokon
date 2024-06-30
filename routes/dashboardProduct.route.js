@@ -4,6 +4,7 @@ const {
   getProductsPage,
   getProductsAddPage,
   addNewProduct,
+  getProductsUpdatePage,
 } = require("../controllers/product.controller");
 const { protected } = require("../middlewares/auth");
 const { body } = require("express-validator");
@@ -11,6 +12,7 @@ const { body } = require("express-validator");
 // Products
 router.get("/", protected, getProductsPage);
 router.get("/add", protected, getProductsAddPage);
+router.get("/:productId/update", protected, getProductsUpdatePage);
 router.post(
   "/add",
   [
@@ -27,5 +29,6 @@ router.post(
   protected,
   addNewProduct
 );
+router.post("/:productId/update", protected, getProductsUpdatePage);
 
 module.exports = router;

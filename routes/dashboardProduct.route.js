@@ -6,14 +6,18 @@ const {
   addNewProduct,
   getProductsUpdatePage,
   updateProduct,
+  deleteProduct,
 } = require("../controllers/product.controller");
 const { protected } = require("../middlewares/auth");
 const { body } = require("express-validator");
 
-// Products
+// All
 router.get("/", protected, getProductsPage);
+// Create page
 router.get("/add", protected, getProductsAddPage);
+// Update page
 router.get("/:productId/update", protected, getProductsUpdatePage);
+// Create
 router.post(
   "/add",
   [
@@ -29,6 +33,8 @@ router.post(
   protected,
   addNewProduct
 );
+
+// Update
 router.post(
   "/:productId/update",
   [
@@ -44,5 +50,8 @@ router.post(
   protected,
   updateProduct
 );
+
+// Delete
+router.get("/:productId/delete", protected, deleteProduct);
 
 module.exports = router;

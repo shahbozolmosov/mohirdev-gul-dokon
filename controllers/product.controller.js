@@ -179,10 +179,26 @@ const updateProduct = async (req, res) => {
   }
 };
 
+// Desc       Delete product
+// Route      DELETE /dashboard/products/product_id/delete
+// Access     Private
+const deleteProduct = async (req, res) => {
+  try {
+    await Product.destroy({
+      where: { id: req.params.productId },
+    });
+
+    res.redirect("/dashboard/products");
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 module.exports = {
   getProductsPage,
   getProductsAddPage,
   addNewProduct,
   getProductsUpdatePage,
   updateProduct,
+  deleteProduct,
 };

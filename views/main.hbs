@@ -8,35 +8,7 @@
         {{#if products}}
           {{#each products}}
             <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
-              <div class="card-style-1 mb-30 pt-0">
-                <div class="card-image">
-                  <a href="#0">
-                    <img
-                      style="height: 400px; width:100%; object-fit:cover"
-                      src="{{image}}"
-                      alt={{title}}
-                    />
-                  </a>
-                </div>
-                <div class="card-content">
-                  <h4><a href="#0"> {{title}} </a></h4>
-                  <p>
-                    {{description}}
-                  </p>
-                  <b>{{amount}}</b>
-                  <div class="mb-5"> </div>
-
-                  <a
-                    class="main-btn success-btn square-btn btn-hover"
-                    href="/dashboard/products/{{id}}/update"
-                  >Update</a>
-                  <a
-                    class="main-btn danger-btn square-btn btn-hover"
-                    href="/dashboard/products/{{id}}/delete"
-                  >Delete</a>
-
-                </div>
-              </div>
+              {{>productCard}}
               <!-- end card-->
             </div>
           {{/each}}

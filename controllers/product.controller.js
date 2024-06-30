@@ -10,7 +10,7 @@ const Product = db.product;
 const getProductsPage = async (req, res) => {
   try {
     // Auth
-    const isAtuhenticated = req.session.isLogged;
+    const isAuthenticated = req.session.isLogged;
 
     // Get products
     const products = await Product.findAll({
@@ -30,7 +30,7 @@ const getProductsPage = async (req, res) => {
           active: true,
         },
       ],
-      isAtuhenticated,
+      isAuthenticated,
       products,
     });
   } catch (error) {
@@ -43,7 +43,7 @@ const getProductsPage = async (req, res) => {
 // Access     Private
 const getProductsAddPage = async (req, res) => {
   try {
-    const isAtuhenticated = req.session.isLogged;
+    const isAuthenticated = req.session.isLogged;
     return res.render("dashboard/products/add", {
       title: "Product Add",
       breadcrumb: [
@@ -61,7 +61,7 @@ const getProductsAddPage = async (req, res) => {
           active: true,
         },
       ],
-      isAtuhenticated,
+      isAuthenticated,
     });
   } catch (error) {
     console.log(error);
@@ -73,7 +73,7 @@ const getProductsAddPage = async (req, res) => {
 // Access     Private
 const addNewProduct = async (req, res) => {
   try {
-    const isAtuhenticated = req.session.isLogged;
+    const isAuthenticated = req.session.isLogged;
     const { title, image, description, amount } = req.body;
 
     // Errors
@@ -97,7 +97,7 @@ const addNewProduct = async (req, res) => {
             active: true,
           },
         ],
-        isAtuhenticated,
+        isAuthenticated,
         errorMessage: errors.array()[0].msg,
         oldInput: {
           title,
@@ -131,7 +131,7 @@ const getProductsUpdatePage = async (req, res) => {
       raw: true,
     });
 
-    const isAtuhenticated = req.session.isLogged;
+    const isAuthenticated = req.session.isLogged;
     return res.render("dashboard/products/update", {
       title: "Product Update",
       breadcrumb: [
@@ -149,7 +149,7 @@ const getProductsUpdatePage = async (req, res) => {
         },
       ],
       product,
-      isAtuhenticated,
+      isAuthenticated,
     });
   } catch (error) {
     console.log(error);

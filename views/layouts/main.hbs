@@ -20,15 +20,15 @@
     <!-- ======== Preloader =========== -->
     
     <!-- ======== sidebar-nav start =========== -->
-    {{#if isAtuhenticated}}
+    {{#if isAuthenticated}}
       {{> sidebarNav}}
     {{/if}}
     <!-- ======== sidebar-nav end =========== -->
 
     <!-- ======== main-wrapper start =========== -->
-    {{#if isAtuhenticated}}
+    {{#if isAuthenticated}}
     <main class="main-wrapper">
-      {{#if isAtuhenticated}}
+      {{#if isAuthenticated}}
         {{>header}}
       {{/if}}
       {{{body}}}

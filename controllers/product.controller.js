@@ -10,12 +10,12 @@ const getProductsPage = async (req, res) => {
   try {
     // Auth
     const isAtuhenticated = req.session.isLogged;
-    
+
     // Get products
     const products = await Product.findAll({
       raw: true,
     });
-   
+
     return res.render("dashboard/products/main", {
       title: "Products",
       breadcrumb: [
@@ -30,7 +30,7 @@ const getProductsPage = async (req, res) => {
         },
       ],
       isAtuhenticated,
-      products
+      products,
     });
   } catch (error) {
     console.log(error);
@@ -115,7 +115,7 @@ const addNewProduct = async (req, res) => {
       amount,
     });
 
-    return res.redirect("/dashboard/products/add");
+    return res.redirect("/dashboard/products");
   } catch (error) {
     console.log(error);
   }

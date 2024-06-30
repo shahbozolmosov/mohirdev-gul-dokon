@@ -127,11 +127,10 @@ const addNewProduct = async (req, res) => {
 // Access     Private
 const getProductsUpdatePage = async (req, res) => {
   try {
-    
     const product = await Product.findByPk(req.params.productId, {
       raw: true,
     });
-    
+
     const isAtuhenticated = req.session.isLogged;
     return res.render("dashboard/products/update", {
       title: "Product Update",
@@ -157,9 +156,33 @@ const getProductsUpdatePage = async (req, res) => {
   }
 };
 
+// Desc       Update product
+// Route      POST /dashboard/products/product_id/update
+// Access     Private
+const updateProduct = async (req, res) => {
+  try {
+    await Product.update(
+      {
+        title: req.body.title,
+        image: req.body.image,
+        description: req.body.description,
+        amount: req.body.amount,
+      },
+      {
+        where: { id: req.params.productId },
+      }
+    );
+
+    res.redirect("/dashboard/products");
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 module.exports = {
   getProductsPage,
   getProductsAddPage,
   addNewProduct,
-  getProductsUpdatePage
+  getProductsUpdatePage,
+  updateProduct
 };

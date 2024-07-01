@@ -28,10 +28,9 @@ const getOrderProductPage = async (req, res) => {
   try {
     // Get product
     const product = await Product.findByPk(req.params.productId, {
-      raw: true
+      raw: true,
     });
 
-console.log(product);
     return res.render("orderProduct", {
       title: `Order - ${product?.title}`,
       isAuthenticated: false,
@@ -42,8 +41,29 @@ console.log(product);
   }
 };
 
+// Desc       Create new order
+// Route      POST /:productId/order
+// Access     Public
+const createNewOrder = async (req, res) => {
+  try {
+    // Get product
+    const product = await Product.findByPk(req.params.productId, {
+      raw: true,
+    });
+
+    if(!product) {
+      req.flash("error", "Product not found");
+      return res.redirect(`${req.params.productId}/order/create`);
+    }
+
+    
+  } catch (err) {
+    console.log(err);
+  }
+};
 
 module.exports = {
   getHomePage,
-  getOrderProductPage
+  getOrderProductPage,
+  createNewOrder,
 };

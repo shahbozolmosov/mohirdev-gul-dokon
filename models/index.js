@@ -16,5 +16,8 @@ db.user = require("./user.model")(sequelize, Sequelize);
 // product
 db.product = require("./product.model")(sequelize, Sequelize);
 
+// region
+db.region = require("./region.model")(sequelize, Sequelize);
+
 // export
 module.exports = db;

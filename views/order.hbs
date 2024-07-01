@@ -1,0 +1,48 @@
+<!-- ========== card components start ========== -->
+<section class="card-components">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="offset-3 col-md-6 my-5">
+        <div class="title">
+          <h2>New order - {{title}}</h2>
+        </div>
+      </div>
+      <div class="offset-3 col-6">
+        <!-- input style start -->
+        <div class="card-style mb-30">
+          <h6 class="mb-25">Input Fields</h6>
+          <div class="input-style-1">
+            <label>FIO</label>
+            <input type="text" placeholder="FIO" name="fio" />
+          </div>
+
+          <div class="select-style-1">
+            <label>Region</label>
+            <div class="select-position">
+              <select name="region">
+                <option value="">Select category</option>
+                <option value="">Category one</option>
+                <option value="">Category two</option>
+                <option value="">Category three</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="input-style-1">
+            <label>Phone</label>
+            <input type="text" placeholder="Phone" name="phone" id="phone-mask" />
+          </div>
+
+          <button type="submit" class="main-btn primary-btn btn-hover">Buyurtma
+            berish</button>
+        </div>
+        <!-- end card -->
+        <!-- ======= input style end ======= -->
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  IMask( document.getElementById('phone-mask'), { mask: '+{7}(000)000-00-00' } )
+</script>

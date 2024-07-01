@@ -2,11 +2,16 @@
 <section class="card-components">
   <div class="container-fluid">
     <div class="row">
+      <div class="offset-3 col-md-6 my-5">
+        <div class="title">
+          <h2>Details - {{title}}</h2>
+        </div>
+      </div>
       <div class="offset-3 col-6">
         {{>productCard}}
       </div>
       <div class="offset-3 col-6">
-        <a class="main-btn primary-btn btn-hover">
+        <a class="main-btn primary-btn btn-hover" href="/{{id}}/order/new">
           Buyurtma berish
         </a>
       </div>

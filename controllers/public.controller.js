@@ -31,7 +31,37 @@ const getProductDetailsPage = async (req, res) => {
       raw: true,
     });
 
-    return res.render("orderProduct", {
+    return res.render("details", {
+      title: `Details - ${product?.title}`,
+      isAuthenticated: false,
+      ...product,
+    });
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+// Desc       Get new order page
+// Route      GET /:productId/order/new
+// Access     Public
+const getOrderNewPage = async (req, res) => {
+  try {
+    // Get product
+    const product = await Product.findByPk(req.params.productId, {
+      raw: true,
+    });
+
+    if(!product) {
+      req.flash("error", "Product not found");
+      return res.render('order', {
+        title: `New order - Not found`,
+        isAuthenticated: false,
+        productNotFound: true
+      });
+    }
+
+    
+    return res.render("order", {
       title: `Order - ${product?.title}`,
       isAuthenticated: false,
       ...product,
@@ -65,5 +95,6 @@ const createNewOrder = async (req, res) => {
 module.exports = {
   getHomePage,
   getProductDetailsPage,
+  getOrderNewPage,
   createNewOrder,
 };

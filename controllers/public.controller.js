@@ -21,6 +21,29 @@ const getHomePage = async (req, res) => {
   }
 };
 
+// Desc       Get oder product page
+// Route      GET /:productId/order
+// Access     Public
+const getOrderProductPage = async (req, res) => {
+  try {
+    // Get product
+    const product = await Product.findByPk(req.params.productId, {
+      raw: true
+    });
+
+console.log(product);
+    return res.render("orderProduct", {
+      title: `Order - ${product?.title}`,
+      isAuthenticated: false,
+      ...product,
+    });
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+
 module.exports = {
   getHomePage,
+  getOrderProductPage
 };

@@ -1,11 +1,11 @@
 const { Router } = require("express");
 const { guest } = require("../middlewares/auth");
-const { getHomePage, getOrderProductPage } = require("../controllers/public.controller");
+const { getHomePage, getProductDetailsPage } = require("../controllers/public.controller");
 const router = Router();
 
 // Home
 router.get("/", guest, getHomePage);
 // Order product
-router.get("/:productId/order", guest, getOrderProductPage);
+router.get("/:productId/details", guest, getProductDetailsPage);
 
 module.exports = router;

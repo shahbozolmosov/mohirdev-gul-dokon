@@ -21,10 +21,10 @@ const getHomePage = async (req, res) => {
   }
 };
 
-// Desc       Get oder product page
+// Desc       Get product details page
 // Route      GET /:productId/order
 // Access     Public
-const getOrderProductPage = async (req, res) => {
+const getProductDetailsPage = async (req, res) => {
   try {
     // Get product
     const product = await Product.findByPk(req.params.productId, {
@@ -64,6 +64,6 @@ const createNewOrder = async (req, res) => {
 
 module.exports = {
   getHomePage,
-  getOrderProductPage,
+  getProductDetailsPage,
   createNewOrder,
 };

@@ -54,30 +54,34 @@ const getAddNewRegionPage = (req, res) => {
 // Desc       Add a new region
 // Route      POST /dashboard/regions
 // Access     Private
-const addNewRegion = (req, res) => {
+const addNewRegion = async (req, res) => {
   try {
     // Authenticated
     const isAuthenticated = req.session.isLogged;
+
+    // Body request
+    const { name } = req.body;
 
     // Errors
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
-      return res.status(400).render("dashboard/region/main", {
-        title: "Regions",
-        breadcrumb: [
-          {
-            label: "Dashboard",
-            route: "/dashboard",
-          },
-          {
-            label: "Regions",
-            route: "/dashboard/regions",
-            active: true,
-          },
-        ],
+      return res.render("dashboard/region/add", {
+        title: "Add New Region",
+        isAuthenticated,
+        errorMessage: errors.array()[0].msg,
+        oldInput: {
+          name,
+        },
       });
     }
+
+    // Create a new region
+    await Region.create({
+      name,
+    });
+
+    return res.redirect('/dashboard/regions')
   } catch (err) {
     console.log(err);
   }
@@ -85,5 +89,6 @@ const addNewRegion = (req, res) => {
 
 module.exports = {
   getRegionPage,
-  getAddNewRegionPage
+  getAddNewRegionPage,
+  addNewRegion,
 };

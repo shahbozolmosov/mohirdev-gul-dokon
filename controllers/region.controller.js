@@ -89,8 +89,24 @@ const addNewRegion = async (req, res) => {
   }
 };
 
+// Desc       Delete a region
+// Route      GET /dashboard/regions/delete
+// Access     Private
+const deleteRegion = async (req, res) => {
+  try {
+    await Region.destroy({
+      where: { id: req.params.id },
+    });
+
+    return res.redirect("/dashboard/regions");
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 module.exports = {
   getRegionPage,
   getAddNewRegionPage,
   addNewRegion,
+  deleteRegion
 };

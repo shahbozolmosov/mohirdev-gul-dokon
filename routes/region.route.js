@@ -5,6 +5,7 @@ const {
   getRegionPage,
   getAddNewRegionPage,
   addNewRegion,
+  deleteRegion,
 } = require("../controllers/region.controller");
 const { body } = require("express-validator");
 
@@ -21,5 +22,6 @@ router.post(
   protected,
   addNewRegion
 );
+router.get("/:id/delete", protected, deleteRegion);
 
 module.exports = router;

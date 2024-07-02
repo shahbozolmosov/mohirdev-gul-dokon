@@ -32,7 +32,7 @@
             <table class="table striped-table">
               <thead>
                 <tr>
-                  <th></th>
+                  <th>#</th>
                   <th>
                     <h6>Name</h6>
                   </th> 
@@ -46,18 +46,18 @@
                 {{#each regions}}
                 <tr>
                   <td>
-                    <div class="check-input-primary">
-                      <input class="form-check-input" type="checkbox" id="checkbox-1" />
-                    </div>
-                  </td>
+                    <p>{{id}}</p>
+                  </td> 
                   <td>
                     <p>{{name}}</p>
                   </td> 
                   <td>
                     <div class="action">
-                      <button class="text-danger">
-                        <i class="lni lni-trash-can"></i>
-                      </button>
+                      <a href="/dashboard/regions/{{id}}/delete">
+                        <button class="text-danger">
+                          <i class="lni lni-trash-can"></i>
+                        </button>
+                      </a>
                     </div>
                   </td>
                 </tr>

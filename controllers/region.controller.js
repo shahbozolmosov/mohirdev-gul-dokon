@@ -12,7 +12,7 @@ const getRegionPage = async (req, res) => {
     // Get regions
     const regions = await Region.findAll();
 
-    return res.render("dashboard/region/region", {
+    return res.render("dashboard/region/main", {
       title: "Regions",
       isAuthenticated,
       breadcrumb: [

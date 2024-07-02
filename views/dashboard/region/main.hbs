@@ -18,14 +18,14 @@
     <!-- ========== title-wrapper end ========== -->
 
     <div class="py-3 d-flex justify-content-end">
-      <a href="/dashboard/products/add" class="main-btn  primary-btn btn-hover">
+      <a href="/dashboard/regions/add" class="main-btn  primary-btn btn-hover">
         <i class="lni lni-plus"></i>
         New Region
       </a>
     </div>
 
     <div class="row">
-      <div class="col-lg-6">
+      <div class="col-lg-6 offset-3">
         <div class="card-style mb-30">
           <h6 class="mb-10">All regions</h6>
           <div class="table-wrapper table-responsive">
@@ -181,32 +181,6 @@
           </div>
         </div>
         <!-- end card -->
-      </div>
-      <div class="col-lg-6">
-        {{#if errorMessage}}
-          <div class="alert alert-danger" role="alert">
-            {{errorMessage}}
-          </div>
-          {{/if}}
-          <form method="POST" accept="/dashboard/products/add">
-            <!-- input style start -->
-            <div class="card-style mb-30">
-              <h6 class="mb-25">New Region</h6>
-              <div class="input-style-1">
-                <label>Name</label>
-                <input name="name" type="text" placeholder="Name" autofocus value="{{oldInput.name}}" />
-              </div>
-              <button class="main-btn dark-btn btn-hover me-3" type="submit">
-                Save
-              </button>  
-              <button class="main-btn light-btn btn-hover" type="reset">
-                Reset
-              </button>  
-              <!-- end input -->
-            </div>
-            <!-- end card -->
-          </form>
-          <!-- ======= input style end ======= -->
       </div>
     </div>
   </div>

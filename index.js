@@ -42,10 +42,13 @@ app.set("view engine", ".hbs");
 // Configure static public folder
 app.use(express.static(path.join(__dirname, "public")));
 
-// Routes
+/* ROUTES */
+// Auth
 app.use("/auth", require("./routes/auth.route"));
+// Dashboard
 app.use("/dashboard", require("./routes/dashboard.route"));
 app.use("/dashboard/products", require("./routes/dashboardProduct.route"));
+app.use("/dashboard/regions", require("./routes/region.route"));
 app.use("/", require("./routes/public.route"));
 
 // PORT
@@ -53,8 +56,8 @@ const PORT = process.env.PORT || 4000;
 
 const start = async () => {
   try {
-    const connect = await db.sequelize.sync({ force: true });
-    // const connect = await db.sequelize.sync();
+    // const connect = await db.sequelize.sync({ force: true });
+    const connect = await db.sequelize.sync();
 
     app.listen(PORT, () => {
       console.log(`Server running at ${PORT}`);

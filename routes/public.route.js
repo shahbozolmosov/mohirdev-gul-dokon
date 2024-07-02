@@ -1,6 +1,12 @@
 const { Router } = require("express");
 const { guest } = require("../middlewares/auth");
-const { getHomePage, getProductDetailsPage, getOrderNewPage, createNewOrder } = require("../controllers/public.controller");
+const {
+  getHomePage,
+  getProductDetailsPage,
+  getOrderNewPage,
+  createNewOrder,
+} = require("../controllers/public.controller");
+const { getRegionPage } = require("../controllers/region.controller");
 const router = Router();
 
 // Home

@@ -1,5 +1,7 @@
+const { raw } = require("express");
 const db = require("../models");
 const Product = db.product;
+const Region = db.region;
 
 // Desc       Get home page
 // Route      GET /
@@ -44,27 +46,34 @@ const getProductDetailsPage = async (req, res) => {
 // Desc       Get new order page
 // Route      GET /:productId/order/new
 // Access     Public
-const getOrderNewPage = async (req, res) => {
+const getNewOrderPage = async (req, res) => {
   try {
     // Get product
     const product = await Product.findByPk(req.params.productId, {
       raw: true,
     });
 
-    if(!product) {
+    console.log('regionsss -->>>>>>>>>>>>>>>>>>>>>>>',product);
+    if (!product) {
       req.flash("error", "Product not found");
-      return res.render('order', {
+      return res.render("order", {
         title: `New order - Not found`,
         isAuthenticated: false,
-        productNotFound: true
+        productNotFound: true,
       });
     }
 
-    
+    // Get all regions
+    const regions = await Region.findAll({
+      raw: true,
+    });
+
+
     return res.render("order", {
       title: `Order - ${product?.title}`,
       isAuthenticated: false,
       ...product,
+      regions,
     });
   } catch (err) {
     console.log(err);
@@ -81,12 +90,10 @@ const createNewOrder = async (req, res) => {
       raw: true,
     });
 
-    if(!product) {
+    if (!product) {
       req.flash("error", "Product not found");
       return res.redirect(`${req.params.productId}/order/create`);
     }
-
-    
   } catch (err) {
     console.log(err);
   }
@@ -95,6 +102,6 @@ const createNewOrder = async (req, res) => {
 module.exports = {
   getHomePage,
   getProductDetailsPage,
-  getOrderNewPage,
+  getNewOrderPage,
   createNewOrder,
 };

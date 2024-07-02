@@ -11,7 +11,9 @@ const getRegionPage = async (req, res) => {
     const isAuthenticated = req.session.isLogged;
 
     // Get regions
-    const regions = await Region.findAll();
+    const regions = await Region.findAll({
+      raw: true,
+    });
 
     return res.render("dashboard/region/main", {
       title: "Regions",
@@ -81,7 +83,7 @@ const addNewRegion = async (req, res) => {
       name,
     });
 
-    return res.redirect('/dashboard/regions')
+    return res.redirect("/dashboard/regions");
   } catch (err) {
     console.log(err);
   }

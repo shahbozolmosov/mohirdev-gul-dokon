@@ -49,6 +49,9 @@ app.use("/auth", require("./routes/auth.route"));
 app.use("/dashboard", require("./routes/dashboard.route"));
 app.use("/dashboard/products", require("./routes/dashboardProduct.route"));
 app.use("/dashboard/regions", require("./routes/region.route"));
+app.use("/dashboard/notif", require("./routes/notif.route"));
+
+// Public
 app.use("/order", require("./routes/order.route"));
 app.use("/", require("./routes/public.route"));
 

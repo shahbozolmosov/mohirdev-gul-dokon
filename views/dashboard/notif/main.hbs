@@ -1,0 +1,76 @@
+<!-- ========== card components start ========== -->
+<section class="card-components">
+  <div class="container-fluid">
+    <!-- ========== title-wrapper start ========== -->
+    <div class="title-wrapper pt-30">
+      <div class="row align-items-center">
+        <div class="col-md-6">
+          {{>wrapperTitle label=title}}
+        </div>
+        <!-- end col -->
+        <div class="col-md-6">
+          {{>breadcrumb}}
+        </div>
+        <!-- end col -->
+      </div>
+      <!-- end row -->
+    </div>
+    <!-- ========== title-wrapper end ========== -->
+
+    {{!-- <div class="py-3 d-flex justify-content-end">
+      <a href="/dashboard/regions/add" class="main-btn  primary-btn btn-hover">
+        <i class="lni lni-plus"></i>
+        New Region
+      </a>
+    </div> --}}
+
+    <div class="row">
+      <div class="col-lg-6 offset-3">
+        <div class="card-style mb-30">
+          <h6 class="mb-10">All new orders</h6>
+          <div class="table-wrapper table-responsive">
+            <table class="table striped-table">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>
+                    <h6>Name</h6>
+                  </th> 
+                  <th>
+                    <h6>Phone</h6>
+                  </th>
+                </tr>
+                <!-- end table row-->
+              </thead>
+              <tbody>
+                {{#each orders}}
+                <tr>
+                  <td>
+                    <p>{{fio}}</p>
+                  </td> 
+                  <td>
+                    <p>{{phone}}</p>
+                  </td> 
+                  <td>
+                    <div class="action">
+                      <a href="/dashboard/regions/{{id}}/delete">
+                        <button class="text-danger">
+                          <i class="lni lni-trash-can"></i>
+                        </button>
+                      </a>
+                    </div>
+                  </td>
+                </tr>
+                <!-- end table row -->
+                {{/each}} 
+              </tbody>
+            </table>
+            <!-- end table -->
+          </div>
+        </div>
+        <!-- end card -->
+      </div>
+    </div>
+  </div>
+</section>
+    

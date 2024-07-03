@@ -53,7 +53,6 @@ const getNewOrderPage = async (req, res) => {
       raw: true,
     });
 
-    console.log('regionsss -->>>>>>>>>>>>>>>>>>>>>>>',product);
     if (!product) {
       req.flash("error", "Product not found");
       return res.render("order", {
@@ -85,6 +84,10 @@ const getNewOrderPage = async (req, res) => {
 // Access     Public
 const createNewOrder = async (req, res) => {
   try {
+    
+    
+    console.log("🚀 ~ createNewOrder ~ req:", req.body)
+    return;
     // Get product
     const product = await Product.findByPk(req.params.productId, {
       raw: true,

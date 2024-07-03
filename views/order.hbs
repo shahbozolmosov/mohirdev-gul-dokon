@@ -11,41 +11,43 @@
           </div>
         </div>
         <div class="offset-3 col-6">
-          <!-- input style start -->
-          <div class="card-style mb-30">
-            <h6 class="mb-25">Input Fields</h6>
-            <div class="input-style-1">
-              <label>FIO</label>
-              <input type="text" placeholder="FIO" name="fio" />
-            </div>
-
-            <div class="select-style-1">
-              <label>Region</label>
-              <div class="select-position">
-                <select name="region">
-                    <option value="">--Select--</option>
-                  {{#each regions}}
-                    <option value="{{id}}">{{name}}</option>
-                  {{/each}}
-                </select>
+          <form method="POST">
+            <!-- input style start -->
+            <div class="card-style mb-30">
+              <h6 class="mb-25">Input Fields</h6>
+              <div class="input-style-1">
+                <label>FIO</label>
+                <input type="text" placeholder="FIO" name="fio" />
               </div>
-            </div>
 
-            <div class="input-style-1">
-              <label>Phone</label>
-              <input
-                type="text"
-                placeholder="Phone"
-                name="phone"
-                id="phone-mask"
-              />
-            </div>
+              <div class="select-style-1">
+                <label>Region</label>
+                <div class="select-position">
+                  <select name="region">
+                    <option value="">--Select--</option>
+                    {{#each regions}}
+                      <option value="{{id}}">{{name}}</option>
+                    {{/each}}
+                  </select>
+                </div>
+              </div>
 
-            <button
-              type="submit"
-              class="main-btn primary-btn btn-hover"
-            >Buyurtma berish</button>
-          </div>
+              <div class="input-style-1">
+                <label>Phone</label>
+                <input
+                  type="text"
+                  placeholder="Phone"
+                  name="phone"
+                  id="phone-mask"
+                />
+              </div>
+
+              <button
+                type="submit"
+                class="main-btn primary-btn btn-hover"
+              >Buyurtma berish</button>
+            </div>
+          </form>
           <!-- end card -->
           <!-- ======= input style end ======= -->
         </div>

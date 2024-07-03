@@ -20,15 +20,17 @@
     <b>{{amount}}</b>
 
     {{#if isAuthenticated}}
-      <div class="mb-5"> </div>
-      <a
-        class="main-btn success-btn square-btn btn-hover"
-        href="/dashboard/products/{{id}}/update"
-      >Update</a>
-      <a
-        class="main-btn danger-btn square-btn btn-hover"
-        href="/dashboard/products/{{id}}/delete"
-      >Delete</a>
+    {{#unless isHidden}}
+        <div class="mb-5"> </div>
+        <a
+          class="main-btn success-btn square-btn btn-hover"
+          href="/dashboard/products/{{id}}/update"
+        >Update</a>
+        <a
+          class="main-btn danger-btn square-btn btn-hover"
+          href="/dashboard/products/{{id}}/delete"
+        >Delete</a>
+      {{/unless}}
     {{/if}}
 
   </div>

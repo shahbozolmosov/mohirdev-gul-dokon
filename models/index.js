@@ -36,13 +36,13 @@ db.region.hasMany(db.order, {
 });
 
 // ORDER
-db.order.belongsTo(db.user, {
+db.order.belongsTo(db.product, {
   foreignKey: "productId",
   as: "product",
 });
 db.order.belongsTo(db.region, {
   foreignKey: "regionId",
-  as: "order",
+  as: "region",
 });
 
 // export

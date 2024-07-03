@@ -1,22 +1,21 @@
 const db = require("../models");
 const Order = db.order;
 
-// Desc       Get notifications page
+// Desc       Get dashboard order page
 // Route      GET /dashboard/notifications
 // Access     Private
-const getNotifPage = async (req, res) => {
+const getDashboardOrderPage = async (req, res) => {
   try {
-
     // Authenticated
     const isAuthenticated = req.session.isLogged;
-    
+
     // Orders
     const orders = await Order.findAll({
       raw: true,
     });
 
-    return res.render("dashboard/notif/main", {
-      title: "Notifications - New order",
+    return res.render("dashboard/order/main", {
+      title: "New orders",
       isAuthenticated,
       orders,
     });
@@ -26,5 +25,5 @@ const getNotifPage = async (req, res) => {
 };
 
 module.exports = {
-  getNotifPage,
+  getDashboardOrderPage,
 };

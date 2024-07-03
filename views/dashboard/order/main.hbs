@@ -39,12 +39,18 @@
                   <th>
                     <h6>Phone</h6>
                   </th>
+                  <th>
+                    <h6>Amal</h6>
+                  </th>
                 </tr>
                 <!-- end table row-->
               </thead>
               <tbody>
                 {{#each orders}}
                 <tr>
+                  <td>
+                    <p>{{id}}</p>
+                  </td> 
                   <td>
                     <p>{{fio}}</p>
                   </td> 
@@ -53,10 +59,10 @@
                   </td> 
                   <td>
                     <div class="action">
-                      <a href="/dashboard/regions/{{id}}/delete">
-                        <button class="text-danger">
-                          <i class="lni lni-trash-can"></i>
-                        </button>
+                      <a href="/dashboard/notif/{{id}}/delete">
+                        <a class="main-btn primary-btn square-btn btn-hover btn-sm rounded-full">
+                          <i class="lni lni-checkmark"></i>
+                        </a>
                       </a>
                     </div>
                   </td>

@@ -1,8 +1,10 @@
 const Router = require("express");
 const router = Router();
 const { protected } = require("../middlewares/auth");
-const { getNotifPage } = require("../controllers/notif.controller");
+const {
+  getDashboardOrderPage,
+} = require("../controllers/dashboardOrder.controller");
 
-router.get("/", protected, getNotifPage);
+router.get("/", protected, getDashboardOrderPage);
 
 module.exports = router;

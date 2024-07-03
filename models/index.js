@@ -29,10 +29,20 @@ db.product.hasMany(db.order, {
   constraints: true,
 });
 
+// REGION
+db.region.hasMany(db.order, {
+  as: "order",
+  constraints: true,
+});
+
 // ORDER
 db.order.belongsTo(db.user, {
   foreignKey: "productId",
   as: "product",
+});
+db.order.belongsTo(db.region, {
+  foreignKey: "regionId",
+  as: "order",
 });
 
 // export

@@ -1,6 +1,7 @@
 const db = require("../models");
 const Region = db.region;
 const Product = db.product;
+const Order = db.order;
 
 // Desc       Get new order page
 // Route      GET order/:productId/new
@@ -42,8 +43,6 @@ const getNewOrderPage = async (req, res) => {
 // Access     Public
 const addNewOrder = async (req, res) => {
   try {
-    console.log("🚀 ~ createNewOrder ~ req:", req.body);
-    return;
     // Get product
     const product = await Product.findByPk(req.params.productId, {
       raw: true,
@@ -51,8 +50,18 @@ const addNewOrder = async (req, res) => {
 
     if (!product) {
       req.flash("error", "Product not found");
-      return res.redirect(`${req.params.productId}/order/create`);
+      return res.redirect(`/${req.params.productId}/order/create`);
     }
+
+    // Create new order
+    await Order.create({
+      fio: req.body.fio,
+      phone: req.body.phone,
+      productId: product.id,
+      regionId: req.body.region
+    });
+
+    return res.status(200).redirect("/");
   } catch (err) {
     console.log(err);
   }

@@ -58,12 +58,13 @@
                     <p>{{phone}}</p>
                   </td> 
                   <td>
-                    <div class="action">
-                      <a href="/dashboard/notif/{{id}}/delete">
-                        <a class="main-btn primary-btn square-btn btn-hover btn-sm rounded-full">
+                    <div class="action d-flex gap-1">
+                        <a href="tel:{{phone}}" class="main-btn light-btn square-btn btn-hover btn-sm rounded-full">
+                          <i class="lni lni-phone"></i>
+                        </a>
+                        <a href="/dashboard/notif/{{id}}/delete" class="main-btn primary-btn square-btn btn-hover btn-sm rounded-full">
                           <i class="lni lni-checkmark"></i>
                         </a>
-                      </a>
                     </div>
                   </td>
                 </tr>

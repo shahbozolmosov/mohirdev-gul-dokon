@@ -39,7 +39,7 @@ const getDashboardOrderConfirmPage = async (req, res) => {
     const order = await Order.findByPk(req.params.orderId, {
       raw: true,
       // plain: false,
-      include: ["product"],
+      include: ["product","region"],
       nest: true,
     });
     console.log("🚀 ~ getDashboardOrderConfirmPage ~ order:", order.product);

@@ -9,50 +9,58 @@
           <div class="title">
             <h2>{{title}}</h2>
           </div>
-        </div>
+        </div> 
         <div class="col-6">
-            {{>productCard image=product.image title=product.title amount=product.amount isHidden=true}}
-        </div>
-        <div class="col-6">
-          <form method="POST">
-            <!-- input style start -->
-            <div class="card-style mb-30">
-              <h6 class="mb-25">Input Fields</h6>
+          {{>productCard image=product.image title=product.title amount=product.amount isHidden=true}}
+          <hr />
+          <!-- input style start -->
+          <div class="card-style mb-30">
+            <h6 class="mb-25">Input Fields</h6>
+            <div class="d-flex gap-3 align-items-start justify-content-between">
               <div class="input-style-1">
-                <label>FIO</label>
-                <input type="text" placeholder="FIO" name="fio" />
+                <label>Customer FIO</label>
+                <h2>{{order.fio}}</h2>
               </div>
-
-              <div class="select-style-1">
-                <label>Region</label>
-                <div class="select-position">
-                  <select name="region">
-                    <option value="">--Select--</option>
-                    {{#each regions}}
-                      <option value="{{id}}">{{name}}</option>
-                    {{/each}}
-                  </select>
-                </div>
+              <div class="d-flex flex-column align-items-end gap-2">
+                <p>
+                  {{order.phone}}
+                </p>
+                <a href="tel:{{order.phone}}" class="main-btn light-btn square-btn btn-hover btn-sm rounded-full">
+                  <i class="lni lni-phone"></i>
+                </a>
               </div>
-
-              <div class="input-style-1">
-                <label>Phone</label>
-                <input
-                  type="text"
-                  placeholder="Phone"
-                  name="phone"
-                  id="phone-mask"
-                />
-              </div>
-
-              <button
-                type="submit"
-                class="main-btn primary-btn btn-hover"
-              >Buyurtma berish</button>
             </div>
-          </form>
+
+            <div class="select-style-1">
+              <label>Region</label>
+              <h2>{{order.region.name}}</h2>
+            </div>
+          </div>
           <!-- end card -->
-          <!-- ======= input style end ======= -->
+             
+        </div>
+        <div class="col-6">
+          <div class="main-sticky-top">
+            <div class="card-style mb-30">
+              <form method="POST">
+                <div class="input-style-1">
+                  <label>Price (<small>Price of one product</small>)</label>
+                  <input type="text" placeholder="Price" name="price" />
+                </div>
+                <div class="input-style-1">
+                  <label>Amount</label>
+                  <input type="text" placeholder="Amount" name="amount" />
+                </div>
+              
+                <button
+                  type="submit"
+                  class="main-btn primary-btn btn-hover"
+                >
+                  Buyurtmani topshirish
+                </button>
+              </form>
+            </div> 
+          </div>
         </div>
       {{/if}}
     </div>

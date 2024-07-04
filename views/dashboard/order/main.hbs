@@ -25,7 +25,7 @@
     </div> --}}
 
     <div class="row">
-      <div class="col-lg-6 offset-3">
+      <div class="col-lg-8 offset-2">
         <div class="card-style mb-30">
           <h6 class="mb-10">All new orders</h6>
           <div class="table-wrapper table-responsive">
@@ -40,6 +40,15 @@
                     <h6>Phone</h6>
                   </th>
                   <th>
+                    <h6>Region</h6>
+                  </th>
+                  <th>
+                    <h6>Product title</h6>
+                  </th>
+                  <th>
+                    <h6>Product image</h6>
+                  </th>
+                  <th>
                     <h6>Amal</h6>
                   </th>
                 </tr>
@@ -52,10 +61,19 @@
                     <p>{{id}}</p>
                   </td> 
                   <td>
-                    <p>{{fio}}</p>
+                    <a href="#">{{fio}}</a>
                   </td> 
                   <td>
                     <p>{{phone}}</p>
+                  </td> 
+                  <td>
+                    <p>{{region.name}}</p>
+                  </td> 
+                  <td>
+                    <p>{{product.title}}</p>
+                  </td> 
+                  <td>
+                    <img src="{{product.image}}" alt="{{product.title}}" width="100" />
                   </td> 
                   <td>
                     <div class="action d-flex gap-1">

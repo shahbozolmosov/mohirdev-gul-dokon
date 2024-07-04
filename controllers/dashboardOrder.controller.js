@@ -12,7 +12,10 @@ const getDashboardOrderPage = async (req, res) => {
     // Orders
     const orders = await Order.findAll({
       raw: true,
+      include: ["region", "product"],
+      nest: true,
     });
+    console.log("🚀 ~ getDashboardOrderPage ~ orders:", orders)
 
     return res.render("dashboard/order/main", {
       title: "New orders",

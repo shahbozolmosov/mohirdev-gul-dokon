@@ -25,7 +25,7 @@
     </div> --}}
 
     <div class="row">
-      <div class="col-lg-8 offset-2">
+      <div class="col-lg-12">
         <div class="card-style mb-30">
           <h6 class="mb-10">All new orders</h6>
           <div class="table-wrapper table-responsive">
@@ -76,10 +76,12 @@
                     <p>{{product.title}}</p>
                   </td> 
                   <td>
-                    <img src="{{product.image}}" alt="{{product.title}}" width="100" />
+                    <img src="{{product.image}}" alt="{{product.title}}" width="100" class="rounded shadow" />
                   </td> 
                   <td>
-                    {{status}}
+                    <span class="status-btn active-btn">
+                      {{status}}
+                    </span>
                   </td> 
                   <td>
                     <div class="action d-flex gap-1">

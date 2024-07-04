@@ -16,6 +16,10 @@ module.exports = (sequelize, Sequelize) => {
         type: Sequelize.STRING(255),
         allowNull: false,
       },
+      status: {
+        type: Sequelize.STRING(255),
+        allowNull: false,
+      },
     },
     {
       timestamps: true,

@@ -22,6 +22,9 @@ db.region = require("./region.model")(sequelize, Sequelize);
 // order
 db.order = require("./order.model")(sequelize, Sequelize);
 
+// payment
+db.payment = require("./payment.model")(sequelize, Sequelize);
+
 /* =============== RELATIONSHIP ============== */
 // PRODUCT
 db.product.hasMany(db.order, {

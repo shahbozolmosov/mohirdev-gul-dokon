@@ -34,6 +34,35 @@ const getDashboardOrderPage = async (req, res) => {
   }
 };
 
+// Desc       Get dashboard order page
+// Route      GET /dashboard/orders
+// Access     Private
+const getDashboardCompletedOrderPage = async (req, res) => {
+  try {
+    // Authenticated
+    const isAuthenticated = req.session.isLogged;
+
+    // Orders
+    const orders = await Order.findAll({
+      raw: true,
+      include: ["region", "product", "payment"],
+      nest: true,
+      where: {
+        status: "completed",
+      },
+    });
+    console.log("🚀 ~ getDashboardCompletedOrderPage ~ orders:", orders)
+
+    return res.render("dashboard/order/completed", {
+      title: "Completed orders",
+      isAuthenticated,
+      orders,
+    });
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 // Desc       Get dashboard order confirm page
 // Route      GET /dashboard/orders/:orderId/confirm
 // Access     Private
@@ -125,7 +154,7 @@ const confirmDashboardOrder = async (req, res) => {
 
     await Order.update(
       {
-        status: "topshirildi",
+        status: "completed",
       },
       {
         where: { id: order.id },
@@ -160,4 +189,5 @@ module.exports = {
   getDashboardOrderPage,
   getDashboardOrderConfirmPage,
   confirmDashboardOrder,
+  getDashboardCompletedOrderPage
 };

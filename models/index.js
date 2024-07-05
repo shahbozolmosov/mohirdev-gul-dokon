@@ -47,8 +47,9 @@ db.order.belongsTo(db.region, {
   foreignKey: "regionId",
   as: "region",
 });
-db.order.hasOne(db.region, {
+db.order.hasOne(db.payment, {
   as: "payment",
+  foreignKey: "orderId",
   constraints: true,
 });
 

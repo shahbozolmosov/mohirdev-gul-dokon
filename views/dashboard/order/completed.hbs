@@ -1,0 +1,132 @@
+<!-- ========== card components start ========== -->
+<section class="card-components">
+  <div class="container-fluid">
+    <!-- ========== title-wrapper start ========== -->
+    <div class="title-wrapper pt-30">
+      <div class="row align-items-center">
+        <div class="col-md-6">
+          {{>wrapperTitle label=title}}
+        </div>
+        <!-- end col -->
+        <div class="col-md-6">
+          {{>breadcrumb}}
+        </div>
+        <!-- end col -->
+      </div>
+      <!-- end row -->
+    </div>
+    <!-- ========== title-wrapper end ========== -->
+
+    {{!-- <div class="py-3 d-flex justify-content-end">
+      <a href="/dashboard/regions/add" class="main-btn  primary-btn btn-hover">
+        <i class="lni lni-plus"></i>
+        New Region
+      </a>
+    </div> --}}
+
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="card-style mb-30">
+          <h6 class="mb-10">All new orders</h6>
+          <div class="table-wrapper table-responsive">
+            <table class="table striped-table">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>
+                    <h6>Name</h6>
+                  </th> 
+                  <th>
+                    <h6>Phone</h6>
+                  </th>
+                  <th>
+                    <h6>Region</h6>
+                  </th>
+                  <th>
+                    <h6>Product title</h6>
+                  </th>
+                  <th>
+                    <h6>Product image</h6>
+                  </th>
+                  <th>
+                    <h6>Payment price</h6>
+                  </th>
+                  <th>
+                    <h6>Ordered count</h6>
+                  </th>
+                  <th>
+                    <h6>Total price</h6>
+                  </th>
+                  <th>
+                    <h6>Status</h6>
+                  </th>
+                  <th>
+                    <h6>Amal</h6>
+                  </th>
+                </tr>
+                <!-- end table row-->
+              </thead>
+              <tbody>
+                {{#if orders}}
+                  {{#each orders}}
+                  <tr>
+                    <td>
+                      <p>{{id}}</p>
+                    </td> 
+                    <td>
+                      <a href="#">{{fio}}</a>
+                    </td> 
+                    <td>
+                      <p>{{phone}}</p>
+                    </td> 
+                    <td>
+                      <p>{{region.name}}</p>
+                    </td> 
+                    <td>
+                      <p>{{product.title}}</p>
+                    </td> 
+                    <td>
+                      <img src="{{product.image}}" alt="{{product.title}}" width="100" class="rounded shadow" />
+                    </td> 
+                    <td>
+                      <p>{{payment.price}}</p>
+                    </td> 
+                    <td>
+                      <p>{{payment.amount}}</p>
+                    </td> 
+                    <td>
+                      <p>{{payment.totalPrice}}</p>
+                    </td> 
+                    <td>
+                      <span class="status-btn primary-btn">
+                        {{status}}
+                      </span>
+                    </td> 
+                    <td>
+                      <div class="action d-flex gap-1">
+                          <a href="tel:{{phone}}" class="main-btn light-btn square-btn btn-hover btn-sm rounded-full">
+                            <i class="lni lni-phone"></i>
+                          </a>
+                      </div>
+                    </td>
+                  </tr>
+                  <!-- end table row -->
+                  {{/each}} 
+                {{else}}
+                  <tr>
+                    <td colspan="8">
+                      <h4 class="text-center">Hozircha yangi buyurtma mavjud emas!</h4>
+                    </td>
+                  </tr>
+                {{/if}}
+              </tbody>
+            </table>
+            <!-- end table -->
+          </div>
+        </div>
+        <!-- end card -->
+      </div>
+    </div>
+  </div>
+</section>
+    

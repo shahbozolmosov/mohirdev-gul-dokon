@@ -5,10 +5,12 @@ const {
   getDashboardOrderPage,
   getDashboardOrderConfirmPage,
   confirmDashboardOrder,
+  getDashboardCompletedOrderPage,
 } = require("../controllers/dashboardOrder.controller");
 const { body } = require("express-validator");
 
 router.get("/", protected, getDashboardOrderPage);
+router.get("/completed", protected, getDashboardCompletedOrderPage);
 router.get("/:orderId/confirm", protected, getDashboardOrderConfirmPage);
 router.post(
   "/:orderId/confirm",

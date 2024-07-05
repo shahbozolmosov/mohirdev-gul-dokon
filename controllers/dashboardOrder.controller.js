@@ -1,5 +1,6 @@
 const { validationResult } = require("express-validator");
 const db = require("../models");
+const { where } = require("sequelize");
 const Order = db.order;
 const Product = db.product;
 const Payment = db.payment;
@@ -18,6 +19,9 @@ const getDashboardOrderPage = async (req, res) => {
       raw: true,
       include: ["region", "product"],
       nest: true,
+      where: {
+        status: "new",
+      },
     });
 
     return res.render("dashboard/order/main", {

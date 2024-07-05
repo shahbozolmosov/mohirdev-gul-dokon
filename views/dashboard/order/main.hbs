@@ -58,44 +58,52 @@
                 <!-- end table row-->
               </thead>
               <tbody>
-                {{#each orders}}
-                <tr>
-                  <td>
-                    <p>{{id}}</p>
-                  </td> 
-                  <td>
-                    <a href="#">{{fio}}</a>
-                  </td> 
-                  <td>
-                    <p>{{phone}}</p>
-                  </td> 
-                  <td>
-                    <p>{{region.name}}</p>
-                  </td> 
-                  <td>
-                    <p>{{product.title}}</p>
-                  </td> 
-                  <td>
-                    <img src="{{product.image}}" alt="{{product.title}}" width="100" class="rounded shadow" />
-                  </td> 
-                  <td>
-                    <span class="status-btn success-btn">
-                      {{status}}
-                    </span>
-                  </td> 
-                  <td>
-                    <div class="action d-flex gap-1">
-                        <a href="tel:{{phone}}" class="main-btn light-btn square-btn btn-hover btn-sm rounded-full">
-                          <i class="lni lni-phone"></i>
-                        </a>
-                        <a href="/dashboard/orders/{{id}}/confirm" class="main-btn primary-btn square-btn btn-hover btn-sm rounded-full">
-                          <i class="lni lni-checkmark"></i>
-                        </a>
-                    </div>
-                  </td>
-                </tr>
-                <!-- end table row -->
-                {{/each}} 
+                {{#if orders}}
+                  {{#each orders}}
+                  <tr>
+                    <td>
+                      <p>{{id}}</p>
+                    </td> 
+                    <td>
+                      <a href="#">{{fio}}</a>
+                    </td> 
+                    <td>
+                      <p>{{phone}}</p>
+                    </td> 
+                    <td>
+                      <p>{{region.name}}</p>
+                    </td> 
+                    <td>
+                      <p>{{product.title}}</p>
+                    </td> 
+                    <td>
+                      <img src="{{product.image}}" alt="{{product.title}}" width="100" class="rounded shadow" />
+                    </td> 
+                    <td>
+                      <span class="status-btn success-btn">
+                        {{status}}
+                      </span>
+                    </td> 
+                    <td>
+                      <div class="action d-flex gap-1">
+                          <a href="tel:{{phone}}" class="main-btn light-btn square-btn btn-hover btn-sm rounded-full">
+                            <i class="lni lni-phone"></i>
+                          </a>
+                          <a href="/dashboard/orders/{{id}}/confirm" class="main-btn primary-btn square-btn btn-hover btn-sm rounded-full">
+                            <i class="lni lni-checkmark"></i>
+                          </a>
+                      </div>
+                    </td>
+                  </tr>
+                  <!-- end table row -->
+                  {{/each}} 
+                {{else}}
+                  <tr>
+                    <td colspan="8">
+                      <h4 class="text-center">Hozircha yangi buyurtma mavjud emas!</h4>
+                    </td>
+                  </tr>
+                {{/if}}
               </tbody>
             </table>
             <!-- end table -->

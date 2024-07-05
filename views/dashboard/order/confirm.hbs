@@ -41,14 +41,19 @@
         <div class="col-6">
           <div class="main-sticky-top">
             <div class="card-style mb-30">
+              {{#if errorMessage}}
+                <div class="alert alert-danger" role="alert">
+                  {{errorMessage}}
+                </div>
+              {{/if}}
               <form method="POST">
                 <div class="input-style-1">
                   <label>Price (<small>Price of one product</small>)</label>
-                  <input type="text" placeholder="Price" name="price" />
+                  <input type="text" placeholder="Price" name="price" value="{{oldInput.price}}" autofocus />
                 </div>
                 <div class="input-style-1">
                   <label>Amount</label>
-                  <input type="text" placeholder="Amount" name="amount" />
+                  <input type="text" placeholder="Amount" name="amount" value="{{oldInput.amount}}"/>
                 </div>
               
                 <button

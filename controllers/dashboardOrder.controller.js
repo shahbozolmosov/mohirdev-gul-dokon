@@ -1,3 +1,4 @@
+const { validationResult } = require("express-validator");
 const db = require("../models");
 const Order = db.order;
 
@@ -15,7 +16,6 @@ const getDashboardOrderPage = async (req, res) => {
       include: ["region", "product"],
       nest: true,
     });
-    console.log("🚀 ~ getDashboardOrderPage ~ orders:", orders)
 
     return res.render("dashboard/order/main", {
       title: "New orders",
@@ -39,10 +39,9 @@ const getDashboardOrderConfirmPage = async (req, res) => {
     const order = await Order.findByPk(req.params.orderId, {
       raw: true,
       // plain: false,
-      include: ["product","region"],
+      include: ["product", "region"],
       nest: true,
     });
-    console.log("🚀 ~ getDashboardOrderConfirmPage ~ order:", order.product);
 
     return res.render("dashboard/order/confirm", {
       title: `Confirm new order - ${order.fio}`,
@@ -55,7 +54,48 @@ const getDashboardOrderConfirmPage = async (req, res) => {
   }
 };
 
+// Desc       Confirm order
+// Route      POST /dashboard/orders/:orderId/confirm
+// Access     Private
+const confirmDashboardOrder = async (req, res) => {
+  try {
+    // Authenticated
+    const isAuthenticated = req.session.isLogged;
+
+    const { price, amount } = req.body;
+
+    // Orders
+    const order = await Order.findByPk(req.params.orderId, {
+      raw: true,
+      // plain: false,
+      include: ["product", "region"],
+      nest: true,
+    });
+
+    // Errors
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+      return res.status(400).render("dashboard/order/confirm", {
+        title: `Confirm new order - ${order.fio}`,
+        isAuthenticated,
+        order,
+        product: order.product,
+        errorMessage: errors.array()[0].msg,
+        oldInput: {
+          price,
+          amount,
+        },
+      });
+    }
+    // const res =
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 module.exports = {
   getDashboardOrderPage,
   getDashboardOrderConfirmPage,
+  confirmDashboardOrder,
 };

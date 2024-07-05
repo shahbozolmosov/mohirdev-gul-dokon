@@ -1,6 +1,9 @@
 const { validationResult } = require("express-validator");
 const db = require("../models");
 const Order = db.order;
+const Product = db.product;
+const Payment = db.payment;
+const sequelize = db.sequelize;
 
 // Desc       Get dashboard order page
 // Route      GET /dashboard/orders
@@ -45,6 +48,7 @@ const getDashboardOrderConfirmPage = async (req, res) => {
 
     return res.render("dashboard/order/confirm", {
       title: `Confirm new order - ${order.fio}`,
+      errorMessage: req.flash("error"),
       isAuthenticated,
       order,
       product: order.product,
@@ -58,6 +62,9 @@ const getDashboardOrderConfirmPage = async (req, res) => {
 // Route      POST /dashboard/orders/:orderId/confirm
 // Access     Private
 const confirmDashboardOrder = async (req, res) => {
+  // Begin transaction
+  const transaction = await sequelize.transaction();
+
   try {
     // Authenticated
     const isAuthenticated = req.session.isLogged;
@@ -88,8 +95,59 @@ const confirmDashboardOrder = async (req, res) => {
         },
       });
     }
-    // const res =
+
+    // Check order status
+    if (order.status !== "new") {
+      req.flash("error", "This product has already been submitted");
+      return res.redirect(`/dashboard/orders/${req.params.orderId}/confirm`);
+    }
+
+    // Check amount
+    if (amount > order.product.amount) {
+      req.flash("error", "There is not enough product in stock");
+      return res.redirect(`/dashboard/orders/${req.params.orderId}/confirm`);
+    }
+
+    // Decrement from stock
+    await Product.update(
+      {
+        amount: order.product.amount - amount,
+      },
+      {
+        where: { id: order.product.id },
+        transaction,
+      }
+    );
+
+    await Order.update(
+      {
+        status: "topshirildi",
+      },
+      {
+        where: { id: order.id },
+        transaction,
+      }
+    );
+
+    await Payment.create(
+      {
+        amount,
+        price,
+        totalPrice: amount * price,
+        orderId: order.id,
+      },
+      {
+        transaction,
+      }
+    );
+
+    // Transaction commit
+    await transaction.commit();
+
+    return res.redirect(`/dashboard/orders`);
   } catch (err) {
+    // Transaction rollback
+    await transaction.rollback();
     console.log(err);
   }
 };

@@ -47,6 +47,17 @@ db.order.belongsTo(db.region, {
   foreignKey: "regionId",
   as: "region",
 });
+db.order.hasOne(db.payment, {
+  as: "payment",
+  foreignKey: "orderId",
+  constraints: true,
+});
+
+// PAYMENT
+db.payment.belongsTo(db.order, {
+  foreignKey: "orderId",
+  as: "order",
+});
 
 // export
 module.exports = db;

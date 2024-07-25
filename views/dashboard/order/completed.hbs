@@ -49,6 +49,15 @@
                     <h6>Product image</h6>
                   </th>
                   <th>
+                    <h6>Payment price</h6>
+                  </th>
+                  <th>
+                    <h6>Ordered count</h6>
+                  </th>
+                  <th>
+                    <h6>Total price</h6>
+                  </th>
+                  <th>
                     <h6>Status</h6>
                   </th>
                   <th>
@@ -80,7 +89,16 @@
                       <img src="{{product.image}}" alt="{{product.title}}" width="100" class="rounded shadow" />
                     </td> 
                     <td>
-                      <span class="status-btn success-btn">
+                      <p>{{payment.price}}</p>
+                    </td> 
+                    <td>
+                      <p>{{payment.amount}}</p>
+                    </td> 
+                    <td>
+                      <p>{{payment.totalPrice}}</p>
+                    </td> 
+                    <td>
+                      <span class="status-btn primary-btn">
                         {{status}}
                       </span>
                     </td> 
@@ -88,9 +106,6 @@
                       <div class="action d-flex gap-1">
                           <a href="tel:{{phone}}" class="main-btn light-btn square-btn btn-hover btn-sm rounded-full">
                             <i class="lni lni-phone"></i>
-                          </a>
-                          <a href="/dashboard/orders/{{id}}/confirm" class="main-btn primary-btn square-btn btn-hover btn-sm rounded-full">
-                            <i class="lni lni-checkmark"></i>
                           </a>
                       </div>
                     </td>
@@ -100,7 +115,7 @@
                 {{else}}
                   <tr>
                     <td colspan="8">
-                      {{>empty title="No new order available yet!"}}
+                      {{>empty title="Not Found!"}}
                     </td>
                   </tr>
                 {{/if}}

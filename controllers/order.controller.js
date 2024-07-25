@@ -58,7 +58,8 @@ const addNewOrder = async (req, res) => {
       fio: req.body.fio,
       phone: req.body.phone,
       productId: product.id,
-      regionId: req.body.region
+      regionId: req.body.region,
+      status: "new",
     });
 
     return res.status(200).redirect("/");

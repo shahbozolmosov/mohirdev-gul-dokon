@@ -36,6 +36,17 @@ db.product.hasMany(db.order, {
   as: "order",
   constraints: true,
 });
+db.product.hasMany(db.comment, {
+  as: "comment",
+  constraints: true,
+});
+
+// COMMENT
+// product
+db.comment.belongsTo(db.product, {
+  foreignKey: "productId",
+  as: "product",
+});
 
 // REGION
 db.region.hasMany(db.order, {

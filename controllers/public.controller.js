@@ -63,9 +63,6 @@ const addCommentToProduct = async (req, res) => {
       });
     }
 
-    console.log(email, comment);
-    return;
-
     // Add
     await Comment.create({
       email,

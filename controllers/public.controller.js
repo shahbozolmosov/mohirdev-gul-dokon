@@ -1,5 +1,6 @@
 const db = require("../models");
 const Product = db.product;
+const Comment = db.comment;
 
 // Desc       Get home page
 // Route      GET /
@@ -22,7 +23,7 @@ const getHomePage = async (req, res) => {
 };
 
 // Desc       Get product details page
-// Route      GET /:productId/order
+// Route      GET /:productId/details
 // Access     Public
 const getProductDetailsPage = async (req, res) => {
   try {
@@ -41,7 +42,42 @@ const getProductDetailsPage = async (req, res) => {
   }
 };
 
+// Desc       Add comment to product
+// Route      GET /:productId/comment
+// Access     Public
+const addCommentToProduct = async (req, res) => {
+  try {
+    // Req body
+    const { email, comment } = req.body;
+
+    // Get product
+    const product = await Product.findByPk(req.params.productId, {
+      raw: true,
+    });
+
+    // Check not found
+    if (!product) {
+      return res.status(404).render("details", {
+        title: `Details - ${product?.title}`,
+        isAuthenticated: false,
+      });
+    }
+
+    // Add
+    await Comment.create({
+      email,
+      comment,
+      productId: req.params.id,
+    });
+
+    return res.status(201).redirect(`/${product.id}/details`);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 module.exports = {
   getHomePage,
   getProductDetailsPage,
+  addCommentToProduct,
 };

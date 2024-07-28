@@ -1,7 +1,7 @@
 <!-- ========== card components start ========== -->
-<section class="card-components">
+<section class="card-components pb-5">
   <div class="container-fluid">
-    <div class="row">
+    <div class="row mb-5">
       <div class="offset-3 col-md-6 my-5">
         <div class="title">
           <h2>Details - {{title}}</h2>
@@ -17,5 +17,43 @@
       </div>
 
     </div>
+    
+    {{! Comment }}
+    <div class="row">
+      <div class="col-md-6 offset-3">
+        <div class="card-body">
+          {{#if errorMessage}}
+            <div class="alert alert-danger" role="alert">{{errorMessage}}</div>
+          {{/if}}
+          <form
+            action="/diary/comment/{{diary.id}}"
+            method="post"
+            enctype="application/x-www-form-urlencoded"
+          >
+            <div class="mb-3">
+              <label for="email" class="form-label">Email</label>
+              <input
+                class="form-control"
+                type="email"
+                name="email"
+                id="email"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="comment" class="form-label">Add Comment</label>
+              <textarea
+                class="form-control"
+                name="comment"
+                id="comment"
+                rows="4"
+              ></textarea>
+            </div>
+            <input type="hidden" name="_csrf" value="{{csrfToken}}" />
+            <button type="submit" class="btn btn-primary mt-3 px-4">Add</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    
   </div>
 </section>

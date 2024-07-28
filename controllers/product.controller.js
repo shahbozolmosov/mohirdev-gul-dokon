@@ -1,8 +1,7 @@
 const { validationResult } = require("express-validator");
 const db = require("../models");
-const { raw } = require("express");
-const { where } = require("sequelize");
 const Product = db.product;
+const Comment = db.comment;
 
 // Desc       Get dashboard products page
 // Route      GET /dashboard/products
@@ -97,6 +96,7 @@ const getProductDetailsPage = async (req, res) => {
       ],
       isAuthenticated,
       ...product,
+      productId: product.id,
       comments: product.comment,
     });
   } catch (err) {
@@ -260,6 +260,27 @@ const deleteProduct = async (req, res) => {
   }
 };
 
+// Desc       Delete product comment
+// Route      DELETE /dashboard/products/:productId/:commentId/delete
+// Access     Private
+const deleteProductComment = async (req, res) => {
+  try {
+    const isDelete = await Comment.destroy({
+      where: { id: req.params.commentId },
+    });
+
+    if (!isDelete) {
+      return res
+        .status(404)
+        .redirect(`/dashboard/products/${req.params.productId}/details`);
+    }
+
+    res.redirect(`/dashboard/products/${req.params.productId}/details`);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 module.exports = {
   getProductsPage,
   getProductDetailsPage,
@@ -268,4 +289,5 @@ module.exports = {
   getProductsUpdatePage,
   updateProduct,
   deleteProduct,
+  deleteProductComment,
 };

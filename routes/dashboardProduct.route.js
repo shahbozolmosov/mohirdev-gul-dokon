@@ -8,6 +8,7 @@ const {
   updateProduct,
   deleteProduct,
   getProductDetailsPage,
+  deleteProductComment,
 } = require("../controllers/product.controller");
 const { protected } = require("../middlewares/auth");
 const { body } = require("express-validator");
@@ -56,5 +57,6 @@ router.post(
 
 // Delete
 router.get("/:productId/delete", protected, deleteProduct);
+router.get("/:productId/:commentId/delete", protected, deleteProductComment);
 
 module.exports = router;

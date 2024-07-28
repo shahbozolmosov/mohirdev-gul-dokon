@@ -38,6 +38,72 @@ const getProductsPage = async (req, res) => {
   }
 };
 
+// Desc       Get dashboard products details page
+// Route      GET /dashboard/products/:productId/details
+// Access     Private
+const getProductDetailsPage = async (req, res) => {
+  try {
+    // Auth
+    const isAuthenticated = req.session.isLogged;
+
+    // Get product
+    const data = await Product.findByPk(req.params.productId, {
+      raw: false,
+      plain: true,
+      include: ["comment"],
+      nest: true,
+    });
+
+    const product = await data.toJSON();
+
+    if (!product) {
+      return res.status(404).render("dashboard/products/details", {
+        title: `Details - Not found`,
+        breadcrumb: [
+          {
+            label: "Dashboard",
+            route: "/dashboard",
+          },
+          {
+            label: "Products",
+            route: "/dashboard/products",
+          },
+          {
+            label: "Details",
+            active: true,
+          },
+        ],
+        isAuthenticated,
+        ...product,
+        comments: [],
+      });
+    }
+
+    return res.render("dashboard/products/details", {
+      title: `Details - ${product.title}`,
+      breadcrumb: [
+        {
+          label: "Dashboard",
+          route: "/dashboard",
+        },
+        {
+          label: "Products",
+          route: "/dashboard/products",
+        },
+        {
+          label: "Details",
+          active: true,
+        },
+      ],
+      isAuthenticated,
+      ...product,
+      comments: product.comment,
+    });
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 // Desc       Get dashboard products add page
 // Route      GET /dashboard/products/add
 // Access     Private
@@ -196,6 +262,7 @@ const deleteProduct = async (req, res) => {
 
 module.exports = {
   getProductsPage,
+  getProductDetailsPage,
   getProductsAddPage,
   addNewProduct,
   getProductsUpdatePage,

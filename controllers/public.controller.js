@@ -43,7 +43,7 @@ const getProductDetailsPage = async (req, res) => {
 };
 
 // Desc       Add comment to product
-// Route      GET /:productId/comment
+// Route      GET /:productId/details/comment
 // Access     Public
 const addCommentToProduct = async (req, res) => {
   try {
@@ -62,6 +62,9 @@ const addCommentToProduct = async (req, res) => {
         isAuthenticated: false,
       });
     }
+
+    console.log(email, comment);
+    return;
 
     // Add
     await Comment.create({

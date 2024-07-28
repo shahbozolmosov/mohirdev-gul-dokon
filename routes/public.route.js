@@ -10,6 +10,6 @@ const router = Router();
 // Home
 router.get("/", guest, getHomePage);
 router.get("/:productId/details", guest, getProductDetailsPage);
-router.post("/:productId/comment", guest, addCommentToProduct);
+router.post("/:productId/details/comment", guest, addCommentToProduct);
 
 module.exports = router;

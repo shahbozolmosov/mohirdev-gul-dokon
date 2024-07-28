@@ -17,9 +17,10 @@
       </div>
 
     </div>
-    
+
+    <hr/>
     {{! Comment }}
-    <div class="row">
+    <div class="row mb-5">
       <div class="col-md-6 offset-3">
         <div class="card-body">
           {{#if errorMessage}}
@@ -52,6 +53,36 @@
             <button type="submit" class="btn btn-primary mt-3 px-4">Add</button>
           </form>
         </div>
+      </div>
+    </div>
+
+    {{! Comment list }}
+    <div class="row">
+      <div class="col-md-6 offset-3">
+        {{#if comments}}
+          {{#each comments}}
+            <div class="card mb-3" style="max-width: 540px;">
+              <div class="row g-0">
+                <div class="col-md-2">
+                  <img
+                    src="https://img.freepik.com/premium-vector/bearded-man-avatar-man-vector-portrait_9385-36.jpg"
+                    class="img-fluid rounded-start"
+                    alt="..."
+                  />
+                </div>
+                <div class="col-md-10">
+                  <div class="card-body">
+                    <h5 class="card-title">{{email}}</h5>
+                    <p class="card-text">{{comment}}</p>
+                    <p class="card-text"><small
+                        class="text-body-secondary"
+                      >{{createdAt}}</small></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          {{/each}}
+        {{/if}}
       </div>
     </div>
     

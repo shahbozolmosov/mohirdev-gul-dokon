@@ -28,14 +28,20 @@ const getHomePage = async (req, res) => {
 const getProductDetailsPage = async (req, res) => {
   try {
     // Get product
-    const product = await Product.findByPk(req.params.productId, {
-      raw: true,
+    const data = await Product.findByPk(req.params.productId, {
+      raw: false,
+      plain: true,
+      include: ["comment"],
+      nest: true,
     });
+
+    const product = await data.toJSON();
 
     return res.render("details", {
       title: `Details - ${product?.title}`,
       isAuthenticated: false,
       ...product,
+      comments: product.comment
     });
   } catch (err) {
     console.log(err);
@@ -67,7 +73,7 @@ const addCommentToProduct = async (req, res) => {
     await Comment.create({
       email,
       comment,
-      productId: req.params.id,
+      productId: req.params.productId,
     });
 
     return res.status(201).redirect(`/${product.id}/details`);

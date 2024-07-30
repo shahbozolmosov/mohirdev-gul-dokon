@@ -27,7 +27,7 @@ const calculateMonthlyOrders = async () => {
   });
 
   // Percent change
-  const orderPercent = getPercentChange(ordersCurrentMonth, ordersLastMonth);
+  const orderPercent = await getPercentChange(ordersCurrentMonth, ordersLastMonth);
 
   
   return {

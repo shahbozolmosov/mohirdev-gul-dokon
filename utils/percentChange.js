@@ -3,7 +3,7 @@ const getPercentChange = async (current, last) => {
   if (last === 0) {
     percentChange = current === 0 ? 0 : 100;
   } else {
-    percentChange = ((current - last) / 100) * 100;
+    percentChange = ((current - last) / last) * 100;
   }
 
   return Math.round(percentChange * 100) / 100;

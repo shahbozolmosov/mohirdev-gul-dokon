@@ -1,6 +1,7 @@
 const { Op } = require("sequelize");
 const db = require("../models");
 const getMonthlyDate = require("./monthlyDate");
+const getPercentChange = require("./percentChange");
 const Order = db.order;
 
 const calculateMonthlyOrders = async () => {
@@ -25,17 +26,13 @@ const calculateMonthlyOrders = async () => {
     },
   });
 
-  let orderPercent;
-  if (ordersLastMonth === 0) {
-    orderPercent = ordersCurrentMonth === 0 ? 0 : 100;
-  } else {
-    orderPercent =
-      ((ordersCurrentMonth - ordersLastMonth) / ordersLastMonth) * 100;
-  }
+  // Percent change
+  const orderPercent = getPercentChange(ordersCurrentMonth, ordersLastMonth);
 
+  
   return {
     ordersCurrentMonth,
-    orderPercent: Math.round(orderPercent * 100) / 100,
+    orderPercent: orderPercent,
   };
 };
 

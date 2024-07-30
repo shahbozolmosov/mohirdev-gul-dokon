@@ -22,12 +22,21 @@
             </div>
             <div class="content">
               <h6 class="mb-10">New Orders</h6>
-              <h3 class="text-bold mb-10">{{cardsData.newOrderCount}}</h3>
-              <p class="text-sm text-success">
-                <i class="lni lni-arrow-up"></i>
-                +2.00%
-                <span class="text-gray">(30 days)</span>
-              </p>
+              <h3 class="text-bold mb-10">{{cardsData.newOrder.count}}</h3>
+                
+              {{#if cardsData.newOrder.isPercentUp}}
+                <p class="text-sm text-success">
+                  <i class="lni lni-arrow-up"></i>
+                  {{cardsData.newOrder.percent}}%
+                  <span class="text-gray">(30 days)</span>
+                </p>
+              {{else}}
+                <p class="text-sm text-danger">
+                  <i class="lni lni-arrow-down"></i>
+                  {{cardsData.newOrder.percent}}%
+                  <span class="text-gray">(30 days)</span>
+                </p>
+              {{/if}}
             </div>
           </div>
           <!-- End Icon Cart -->

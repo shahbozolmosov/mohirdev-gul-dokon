@@ -7,12 +7,16 @@ const {
   getProductsUpdatePage,
   updateProduct,
   deleteProduct,
+  getProductDetailsPage,
+  deleteProductComment,
 } = require("../controllers/product.controller");
 const { protected } = require("../middlewares/auth");
 const { body } = require("express-validator");
 
 // All
 router.get("/", protected, getProductsPage);
+// Details page
+router.get("/:productId/details", protected, getProductDetailsPage);
 // Create page
 router.get("/add", protected, getProductsAddPage);
 // Update page
@@ -53,5 +57,6 @@ router.post(
 
 // Delete
 router.get("/:productId/delete", protected, deleteProduct);
+router.get("/:productId/:commentId/delete", protected, deleteProductComment);
 
 module.exports = router;

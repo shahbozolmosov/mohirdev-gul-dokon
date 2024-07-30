@@ -1,6 +1,22 @@
 <!-- ========== card components start ========== -->
-<section class="card-components pb-5">
+<section class="card-components">
   <div class="container-fluid">
+    <!-- ========== title-wrapper start ========== -->
+    <div class="title-wrapper pt-30">
+      <div class="row align-items-center">
+        <div class="col-md-6">
+          {{>wrapperTitle label=title}}
+        </div>
+        <!-- end col -->
+        <div class="col-md-6">
+          {{>breadcrumb}}
+        </div>
+        <!-- end col -->
+      </div>
+      <!-- end row -->
+    </div>
+    <!-- ========== title-wrapper end ========== -->
+    
     <div class="row mb-5">
       <div class="offset-3 col-md-6 my-5">
         <div class="title">
@@ -10,51 +26,9 @@
       <div class="offset-3 col-6">
         {{>productCard}}
       </div>
-      <div class="offset-3 col-6">
-        <a class="main-btn primary-btn btn-hover" href="/order/{{id}}/new">
-          Buyurtma berish
-        </a>
-      </div>
-
     </div>
 
     <hr/>
-    {{! Comment }}
-    <div class="row mb-5">
-      <div class="col-md-6 offset-3">
-        <div class="card-body">
-          {{#if errorMessage}}
-            <div class="alert alert-danger" role="alert">{{errorMessage}}</div>
-          {{/if}}
-          <form
-            action="/{{id}}/details/comment"
-            method="post"
-            enctype="application/x-www-form-urlencoded"
-          >
-            <div class="mb-3">
-              <label for="email" class="form-label">Email</label>
-              <input
-                class="form-control"
-                type="email"
-                name="email"
-                id="email"
-              />
-            </div>
-            <div class="mb-3">
-              <label for="comment" class="form-label">Add Comment</label>
-              <textarea
-                class="form-control"
-                name="comment"
-                id="comment"
-                rows="4"
-              ></textarea>
-            </div>
-            <input type="hidden" name="_csrf" value="{{csrfToken}}" />
-            <button type="submit" class="btn btn-primary mt-3 px-4">Add</button>
-          </form>
-        </div>
-      </div>
-    </div>
 
     {{! Comment list }}
     <div class="row">
@@ -77,6 +51,11 @@
                     <p class="card-text"><small
                         class="text-body-secondary"
                       >{{createdAt}}</small></p>
+                    {{!-- /:productId/:commentId/delete --}}
+                    <a
+                      class="btn btn-danger btn-hover rounded"
+                      href="/dashboard/products/{{productId}}/{{id}}/delete"
+                    >Delete</a>
                   </div>
                 </div>
               </div>
@@ -85,6 +64,6 @@
         {{/if}}
       </div>
     </div>
-    
+
   </div>
 </section>

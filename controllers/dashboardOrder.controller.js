@@ -51,7 +51,6 @@ const getDashboardCompletedOrderPage = async (req, res) => {
         status: "completed",
       },
     });
-    console.log("🚀 ~ getDashboardCompletedOrderPage ~ orders:", orders)
 
     return res.render("dashboard/order/completed", {
       title: "Completed orders",
@@ -189,5 +188,5 @@ module.exports = {
   getDashboardOrderPage,
   getDashboardOrderConfirmPage,
   confirmDashboardOrder,
-  getDashboardCompletedOrderPage
+  getDashboardCompletedOrderPage,
 };

@@ -1,5 +1,6 @@
 const db = require("../models");
 const Product = db.product;
+const Comment = db.comment;
 
 // Desc       Get home page
 // Route      GET /
@@ -22,20 +23,60 @@ const getHomePage = async (req, res) => {
 };
 
 // Desc       Get product details page
-// Route      GET /:productId/order
+// Route      GET /:productId/details
 // Access     Public
 const getProductDetailsPage = async (req, res) => {
   try {
     // Get product
-    const product = await Product.findByPk(req.params.productId, {
-      raw: true,
+    const data = await Product.findByPk(req.params.productId, {
+      raw: false,
+      plain: true,
+      include: ["comment"],
+      nest: true,
     });
+
+    const product = await data.toJSON();
 
     return res.render("details", {
       title: `Details - ${product?.title}`,
       isAuthenticated: false,
       ...product,
+      comments: product.comment
     });
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+// Desc       Add comment to product
+// Route      GET /:productId/details/comment
+// Access     Public
+const addCommentToProduct = async (req, res) => {
+  try {
+    // Req body
+    const { email, comment } = req.body;
+
+    // Get product
+    const product = await Product.findByPk(req.params.productId, {
+      raw: true,
+    });
+
+    // Check not found
+    if (!product) {
+      return res.status(404).render("details", {
+        title: `Details - ${product?.title}`,
+        isAuthenticated: false,
+      });
+    }
+
+    // Add
+    await Comment.create({
+      email,
+      comment,
+      productId: req.params.productId,
+    });
+
+    return res.status(201).redirect(`/${product.id}/details`);
   } catch (err) {
     console.log(err);
   }
@@ -44,4 +85,5 @@ const getProductDetailsPage = async (req, res) => {
 module.exports = {
   getHomePage,
   getProductDetailsPage,
+  addCommentToProduct,
 };

@@ -16,6 +16,9 @@ db.user = require("./user.model")(sequelize, Sequelize);
 // product
 db.product = require("./product.model")(sequelize, Sequelize);
 
+// comment
+db.comment = require("./comment.model")(sequelize, Sequelize);
+
 // region
 db.region = require("./region.model")(sequelize, Sequelize);
 
@@ -26,10 +29,23 @@ db.order = require("./order.model")(sequelize, Sequelize);
 db.payment = require("./payment.model")(sequelize, Sequelize);
 
 /* =============== RELATIONSHIP ============== */
+// USER
+
 // PRODUCT
 db.product.hasMany(db.order, {
   as: "order",
   constraints: true,
+});
+db.product.hasMany(db.comment, {
+  as: "comment",
+  constraints: true,
+});
+
+// COMMENT
+// product
+db.comment.belongsTo(db.product, {
+  foreignKey: "productId",
+  as: "product",
 });
 
 // REGION

@@ -1,8 +1,9 @@
 // Desc       Get dashboard home
 // Route      GET /dashboard
 
+const { calculateMonthlyNewCustomer } = require("../utils/customersStats");
 const calculateMonthlyIncome = require("../utils/incomeStats");
-const calculateMonthlyOrders = require("../utils/orderStats");
+const calculateMonthlyOrders = require("../utils/orderStats"); 
 
 // Access     Private
 const getDashboardPage = async (req, res) => {
@@ -15,6 +16,10 @@ const getDashboardPage = async (req, res) => {
     // Total income
     const { totalIncomeCurrentMonth, incomePercent } =
       await calculateMonthlyIncome();
+
+    // New customers
+    const { newCustomerCurrentMonth, customerPercent } =
+      await calculateMonthlyNewCustomer();
 
     return res.render("dashboard/home", {
       title: "Dashboard",
@@ -29,6 +34,11 @@ const getDashboardPage = async (req, res) => {
           totalPrice: totalIncomeCurrentMonth,
           percent: incomePercent,
           isPercentUp: incomePercent > 0,
+        },
+        newCustomers: {
+          count: newCustomerCurrentMonth,
+          percent: customerPercent, // monthly
+          isPercentUp: customerPercent > 0,
         },
       },
     });

@@ -13,6 +13,9 @@ db.sequelize = sequelize;
 // user
 db.user = require("./user.model")(sequelize, Sequelize);
 
+// user session
+db.userSession = require("./userSession.model")(sequelize, Sequelize);
+
 // product
 db.product = require("./product.model")(sequelize, Sequelize);
 
